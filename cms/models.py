@@ -46,3 +46,19 @@ class Article(models.Model):
     class Meta:
         verbose_name = '文章'
         verbose_name_plural = '文章管理'
+
+
+class Banner(models.Model):
+    cover = models.CharField(verbose_name='封面', max_length=256)
+    article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, blank=True)
+    sort = models.IntegerField(verbose_name='排序', default=0, help_text='值越小排越前')
+
+    def cover_display(self):
+        return self.article.cover_display()
+
+    def __str__(self):
+        return self.article.title
+
+    class Meta:
+        verbose_name = '首页推荐'
+        verbose_name_plural = '首页推荐'
