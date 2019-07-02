@@ -9,6 +9,7 @@ class FileStorage(Storage):
 
     def __init__(self):
         self.root = os.environ.get('UPLOAD_ROOT', getattr(settings, 'UPLOAD_ROOT', None))
+        self.prefix = os.environ.get('UPLOAD_PATH_PREFIX', getattr(settings, 'UPLOAD_PATH_PREFIX', None))
         if not os.path.exists(self.root):
             os.makedirs(self.root)
 
@@ -36,4 +37,4 @@ class FileStorage(Storage):
         f.close()
         content.close()
 
-        return filename
+        return '{}{}'.format(self.prefix, filename)

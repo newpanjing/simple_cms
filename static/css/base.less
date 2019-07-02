@@ -109,6 +109,7 @@ a {
 
 .footer {
   background-color: #3E3E3E;
+  margin-top: 20px;
 
   .copyright {
     color: #8F8F8F;
@@ -120,5 +121,40 @@ a {
     a {
       color: #8F8F8F;
     }
+  }
+}
+
+.clearfix {
+  display: block;
+}
+
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.main-wrap {
+  margin-top: 20px;
+}
+
+.container {
+  .main {
+    width: calc(100% - 280px - 40px);
+    margin-right: 10px;
+    float: left;
+  }
+
+  .side {
+    width: 250px;
+    float: left;
+  }
+
+  .main, .side {
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
   }
 }

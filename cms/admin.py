@@ -14,9 +14,10 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticeAdmin(admin.ModelAdmin):
     list_per_page = 10
-    list_display = ('id', 'cover_display', 'title', 'hits', 'create_date', 'update_date')
+    list_display = ('id', 'cover_display', 'top', 'category', 'title', 'hits', 'create_date', 'update_date')
     search_fields = ('title',)
-    list_filter = ('category',)
+    list_filter = ('category', 'top')
+    list_editable = ('category', 'title', 'top')
 
 
 @admin.register(Banner)

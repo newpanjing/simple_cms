@@ -4,11 +4,13 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from system.models import SystemConfig
+from cms.models import *
 
 
 def index(request):
     return render(request, 'index.html', {
-
+        'latest': Article.objects.values('id', 'title', 'category__alias').last(),
+        'tops': Article.objects.filter(top=True).order_by('-update_date').values('id', 'category__alias', 'title','cover')[:6]
     })
 
 
@@ -43,3 +45,9 @@ def settings_save(req):
     return HttpResponse(json.dumps({
         'success': success
     }), content_type="application/json")
+
+
+def aritlce(req, category, id):
+    return render(req, 'article.html', {
+        'article': Article.objects.get(id=id)
+    })

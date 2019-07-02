@@ -12,24 +12,30 @@
     {% if settings.domain_mobile %}
         <meta name="mobile-agent" content="format=html5; url={{ settings.domain_mobile }}">
     {% endif %}
-    {% if settings.logo %}
-        <meta property="og:type" content="image">
-        <meta property="og:image" content="{{ settings.logo }}">
-    {% endif %}
-
     <link href="/static/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    {% block seo %}
+        <title>{{ settings.site_name }} - {{ settings.site_title }}</title>
+        {% if settings.logo %}
+            <meta property="og:type" content="image">
+            <meta property="og:image" content="{{ settings.logo }}">
+        {% endif %}
 
 
-    <title>{{ settings.site_name }} - {{ settings.site_title }}</title>
-    <meta name="keywords" content="{{ settings.keywords }}"/>
-    <meta name="description" content="{{ settings.description }}"/>
 
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_zew73edsfbm.css"/>
-    <link rel="stylesheet" href="/static/css/index.css"/>
+        <meta name="keywords" content="{{ settings.keywords }}"/>
+        <meta name="description" content="{{ settings.description }}"/>
+    {% endblock %}
 
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_obk0c7sod3c.css"/>
+    {% block css %}
+        <link rel="stylesheet" href="/static/css/index.css"/>
+        <link rel="stylesheet" href="/static/carousel/css/style.css"/>
+    {% endblock %}
     {% if settings.header_html %}
         {{ settings.header_html|safe }}
     {% endif %}
+
+    <script type="text/javascript" src="{% static 'carousel/js/startMove.js' %}"></script>
 
 </head>
 <body>
@@ -69,6 +75,51 @@
             <span class="iconfont icon-search"></span>
         </div>
     </div>
+</div>
+
+<div class="container main-wrap clearfix">
+    <div class="main">
+        {% block main %}
+            <div class="latest">
+                <span class="iconfont icon-notice"></span>
+                <a target="_blank" href="{% url 'article' latest.category__alias latest.id %}">{{ latest.title }}</a>
+                <span class="date">{{ latest.create_date|date:'Y-m-d' }}</span>
+            </div>
+        {% endblock %}
+        <div id="carousel">
+            <div id="box">
+                <ul id="pic_list">
+                    {% for item in tops %}
+                        <li {% if forloop.counter0 == 0 %}
+                            style="z-index:2;opacity:1;fliter:alpha(opacity=100);" {% endif %}><a
+                                href="{% url 'article' item.category__alias item.id %}" target="_blank"><img
+                                src="{{ item.cover }}" alt=""/></a></li>
+                    {% endfor %}
+                </ul>
+
+                <div class="mark"></div>
+
+                <ul id="text_list">
+                    {% for item in tops %}
+                        <li><h2 {% if forloop.counter0 == 0 %} class="show" {% endif %}><a
+                                href="{% url 'article' item.category__alias item.id %}"
+                                target="_blank">{{ item.title }}</a></h2></li>
+                    {% endfor %}
+                </ul>
+
+                <div id="ico_list">
+                    <ul>
+                        {% for item in tops %}
+                            <li {% if forloop.counter0 == 0 %} class="active" {% endif %}><a
+                                    href="javascript:void(0)"><img width="64" height="34" src="{{ item.cover }}"
+                                                                   alt=""/></a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="side">2</div>
 </div>
 
 <div class="footer">

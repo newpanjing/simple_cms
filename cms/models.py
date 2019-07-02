@@ -34,11 +34,13 @@ class Article(models.Model):
 
     hits = models.IntegerField(verbose_name='点击量', default=0)
 
+    top = models.BooleanField(verbose_name='推荐', default=False)
+
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='创建时间', null=True, blank=True)
     update_date = models.DateTimeField(auto_now=True, verbose_name='更新时间', null=True, blank=True)
 
     def cover_display(self):
-        return format_html('<img src="/static/upload/{}" width="50" height="50" loading="lazy" lazy="lazy">', self.cover)
+        return format_html('<img src="{}" width="50" height="50" loading="lazy" lazy="lazy">', self.cover)
 
     cover_display.short_description = '封面'
 

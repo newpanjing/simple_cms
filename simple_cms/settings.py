@@ -145,6 +145,8 @@ DEFAULT_FILE_STORAGE = 'simple_cms.backends.FileStorage'
 
 # 设置文件上传的目录
 UPLOAD_ROOT = os.path.join(BASE_DIR, 'static/upload')
+# 文件前缀路径  xxx/123.png
+UPLOAD_PATH_PREFIX = '/static/upload/'
 
 # 设置admin中自定义菜单
 SIMPLEUI_CONFIG = {
@@ -155,3 +157,5 @@ SIMPLEUI_CONFIG = {
         'url': '/admin/settings'
     }]
 }
+
+SIMPLEUI_STATIC_OFFLINE = True

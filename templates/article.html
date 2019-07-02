@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/article.css' %}"/>
+{% endblock %}
+
+{% block seo %}
+    <title>{{ article.title }}- {{ settings.site_name }}</title>
+    <meta name="keywords" content="{{ article.title }}"/>
+    <meta name="description" content="{{ article.summary }}"/>
+    <meta property="og:type" content="image">
+    <meta property="og:image" content="{{ article.cover }}">
+{% endblock %}
+{% block main %}
+    <div class="article">
+        <h1 class="title">{{ article.title }}</h1>
+        <div class="info">
+            <span class="iconfont icon-book"></span>
+            <span>{{ article.category.name }}</span>
+
+            <span class="iconfont icon-date"></span>
+            <span>{{ article.create_date }}</span>
+
+            <span class="iconfont icon-yanjing"></span>
+            <span>{{ article.hits }}</span>
+        </div>
+
+        <div class="content">
+            {{ article.content|safe }}
+        </div>
+    </div>
+{% endblock %}
