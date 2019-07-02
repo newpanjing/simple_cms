@@ -4,6 +4,7 @@ body, html {
   padding: 0px;
   font: 12px/1.5 Tahoma, Helvetica, 'SimSun', sans-serif;
   color: #444;
+  background: #F2F2F2;
 }
 
 a {
@@ -25,4 +26,99 @@ a {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.top {
+  .btn {
+    margin-right: 10px;
+    color: rgba(#444, 0.6);
+
+    &:hover {
+      color: #444;
+    }
+  }
+}
+
+.navbar {
+  background: #333333;
+  height: 68px;
+  line-height: 68px;
+
+  .logo {
+    float: left;
+    width: 150px;
+    height: 68px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; /*垂直居中*/
+    justify-content: center; /*水平居中*/
+
+    img {
+      max-width: 150px;
+      max-height: 100%;
+      vertical-align: middle;
+      align-items: center;
+    }
+  }
+
+  .link-wrap {
+    float: left;;
+
+    .link {
+      float: left;
+      font-size: 17px;
+      height: 68px;
+      line-height: 68px;
+      color: #FFFFFF;
+      position: relative;
+      padding: 0 20px;
+      margin: 0;
+      font-family: "Microsoft Yahei", Arial;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: #272727;
+      }
+    }
+  }
+
+  .search-bar {
+    float: right;
+    color: #999;
+    background-color: #232323;
+    height: 35px;
+    padding: 0 10px;
+    margin-top: 15px;
+
+    input {
+      display: block;
+      float: left;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      color: #999;
+      line-height: 35px;
+    }
+
+    .iconfont {
+      float: left;
+      line-height: 35px;
+    }
+  }
+}
+
+.footer {
+  background-color: #3E3E3E;
+
+  .copyright {
+    color: #8F8F8F;
+    min-height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+    padding: 20px 0px;
+
+    a {
+      color: #8F8F8F;
+    }
+  }
 }

@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
 
 from simple_cms import views
 
@@ -22,5 +23,6 @@ urlpatterns = [
     path('admin/settings/save', views.settings_save),
     path('admin/settings', views.settings),
     path('admin/', admin.site.urls),
+    path('favicon.ico', RedirectView.as_view(url='static/image/favicon.ico')),
     path('', views.index),
 ]
