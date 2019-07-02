@@ -131,3 +131,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+# 设置文件处理
+DEFAULT_FILE_STORAGE = 'simple_cms.backends.FileStorage'
+
+UPLOAD_ROOT = os.path.join(BASE_DIR, 'static/upload')

@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 from django.utils.html import format_html
+from simpleui.fields import FileField
 
 
 class Category(models.Model):
@@ -24,7 +25,8 @@ class Category(models.Model):
 class Article(models.Model):
     title = models.CharField(verbose_name='标题', max_length=256)
     summary = models.CharField(verbose_name='摘要', max_length=256, null=True, blank=True)
-    cover = models.CharField(verbose_name='封面', max_length=512, null=True, blank=True)
+    cover = models.FileField(verbose_name='封面', max_length=512, null=True, blank=True)
+    # cover = FileField(verbose_name='封面', max_length=512, null=True, blank=True, placeholder='封面')
     content = models.TextField(verbose_name='内容')
 
     tags = models.CharField(verbose_name='标签', max_length=128, null=True, blank=True)
@@ -36,7 +38,7 @@ class Article(models.Model):
     update_date = models.DateTimeField(auto_now=True, verbose_name='更新时间', null=True, blank=True)
 
     def cover_display(self):
-        return format_html('<img src="{}" width="50" height="50" loading="lazy" lazy="lazy">', self.cover)
+        return format_html('<img src="/static/upload/{}" width="50" height="50" loading="lazy" lazy="lazy">', self.cover)
 
     cover_display.short_description = '封面'
 
@@ -50,7 +52,7 @@ class Article(models.Model):
 
 class Banner(models.Model):
     cover = models.CharField(verbose_name='封面', max_length=256)
-    article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, blank=True)
+    article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='文章')
     sort = models.IntegerField(verbose_name='排序', default=0, help_text='值越小排越前')
 
     def cover_display(self):
