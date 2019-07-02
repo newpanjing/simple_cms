@@ -9,8 +9,10 @@ from cms.models import *
 
 def index(request):
     return render(request, 'index.html', {
-        'latest': Article.objects.values('id', 'title', 'category__alias').last(),
-        'tops': Article.objects.filter(top=True).order_by('-update_date').values('id', 'category__alias', 'title','cover')[:6]
+        'latest': Article.objects.values('id', 'title', 'category__alias', 'create_date').last(),
+        'tops': Article.objects.filter(top=True).order_by('-update_date').values('id', 'category__alias', 'title',
+                                                                                 'cover')[:6],
+        'news': Article.objects.order_by('-id').values('title', 'category__alias', 'id', 'summary')[:3]
     })
 
 

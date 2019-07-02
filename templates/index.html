@@ -86,36 +86,49 @@
                 <span class="date">{{ latest.create_date|date:'Y-m-d' }}</span>
             </div>
         {% endblock %}
-        <div id="carousel">
-            <div id="box">
-                <ul id="pic_list">
-                    {% for item in tops %}
-                        <li {% if forloop.counter0 == 0 %}
-                            style="z-index:2;opacity:1;fliter:alpha(opacity=100);" {% endif %}><a
-                                href="{% url 'article' item.category__alias item.id %}" target="_blank"><img
-                                src="{{ item.cover }}" alt=""/></a></li>
-                    {% endfor %}
-                </ul>
+        <div class="clearfix">
 
-                <div class="mark"></div>
-
-                <ul id="text_list">
-                    {% for item in tops %}
-                        <li><h2 {% if forloop.counter0 == 0 %} class="show" {% endif %}><a
-                                href="{% url 'article' item.category__alias item.id %}"
-                                target="_blank">{{ item.title }}</a></h2></li>
-                    {% endfor %}
-                </ul>
-
-                <div id="ico_list">
-                    <ul>
+            <div id="carousel">
+                <div id="box">
+                    <ul id="pic_list">
                         {% for item in tops %}
-                            <li {% if forloop.counter0 == 0 %} class="active" {% endif %}><a
-                                    href="javascript:void(0)"><img width="64" height="34" src="{{ item.cover }}"
-                                                                   alt=""/></a></li>
+                            <li {% if forloop.counter0 == 0 %}
+                                style="z-index:2;opacity:1;fliter:alpha(opacity=100);" {% endif %}><a
+                                    href="{% url 'article' item.category__alias item.id %}" target="_blank"><img
+                                    src="{{ item.cover }}" alt=""/></a></li>
                         {% endfor %}
                     </ul>
+
+                    <div class="mark"></div>
+
+                    <ul id="text_list">
+                        {% for item in tops %}
+                            <li><h2 {% if forloop.counter0 == 0 %} class="show" {% endif %}><a
+                                    href="{% url 'article' item.category__alias item.id %}"
+                                    target="_blank">{{ item.title }}</a></h2></li>
+                        {% endfor %}
+                    </ul>
+
+                    <div id="ico_list">
+                        <ul>
+                            {% for item in tops %}
+                                <li {% if forloop.counter0 == 0 %} class="active" {% endif %}><a
+                                        href="javascript:void(0)"><img width="64" height="34" src="{{ item.cover }}"
+                                                                       alt=""/></a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
+            </div>
+            <div class="news">
+                {% for item in news %}
+                    <div class="item">
+                        <h2><a href="{% url 'article' item.category__alias item.id %}">{{ item.title }}</a></h2>
+                        <div class="summary">
+                            {{ item.summary }}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
