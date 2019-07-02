@@ -65,7 +65,11 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'cmstags': 'simple_cms.templatetags.cmstags',
+            }
         },
+
     },
 ]
 
@@ -139,4 +143,15 @@ STATICFILES_DIRS = [
 # 设置文件处理
 DEFAULT_FILE_STORAGE = 'simple_cms.backends.FileStorage'
 
+# 设置文件上传的目录
 UPLOAD_ROOT = os.path.join(BASE_DIR, 'static/upload')
+
+# 设置admin中自定义菜单
+SIMPLEUI_CONFIG = {
+    'system_keep': True,
+    'menus': [{
+        'name': '网站配置',
+        'icon': 'fas fa-cog',
+        'url': '/admin/settings'
+    }]
+}

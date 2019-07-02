@@ -7,7 +7,9 @@ from .models import *
 @admin.register(SystemConfig)
 class SystemConfigAdmin(admin.ModelAdmin):
     list_per_page = 10
-    list_display = ('id', 'key', 'value')
+    list_display = ('id', 'label', 'type', 'key', 'value')
+    list_filter = ('type',)
+    list_editable = ('type', 'key')
     search_fields = ('key',)
 
 

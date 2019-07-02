@@ -5,8 +5,17 @@ from django.utils.html import format_html
 
 
 class SystemConfig(models.Model):
+    label = models.CharField(max_length=128, verbose_name='配置项', null=True, blank=False)
     key = models.CharField(max_length=128, verbose_name='Key', db_index=True)
     value = models.CharField(max_length=2048, verbose_name='Value')
+
+    update_date = models.DateTimeField(auto_now=True, verbose_name='更新时间', null=True, blank=True)
+
+    type_choices = (
+        (0, '单行文本框'),
+        (1, '多行文本框'),
+    )
+    type = models.IntegerField(choices=type_choices, verbose_name='类型', default=0)
 
     def __str__(self):
         return format_html('{}={}', self.key, self.value)

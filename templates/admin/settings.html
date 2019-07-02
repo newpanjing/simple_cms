@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>配置中心</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="{% static 'js/axios.min.js' %}"></script>
+</head>
+<body class="body">
+
+<div id="app" style="width: 80%;padding: 50px">
+
+    <h1>配置中心</h1>
+    {% csrf_token %}
+    <el-form ref="form" label-width="120px">
+
+        <el-form-item v-for="item in props" :label="item.label" :key="item.key">
+
+            <el-switch v-if="item.type==2" v-model="item.value" :name="item.key"></el-switch>
+
+            <el-input v-else-if="item.type==0" :placeholder="item.key" clearable :name="item.key" v-model="item.value"
+                      maxlength="2048" show-word-limit></el-input>
+
+
+            <el-input v-else-if="item.type==1" :placeholder="item.key" clearable :autosize="{ minRows: 2}"
+                      type="textarea" :name="item.key" v-model="item.value"
+                      maxlength="2048"
+                      show-word-limit>
+
+            </el-input>
+
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">保存设置</el-button>
+        </el-form-item>
+    </el-form>
+    <el-backtop target=".body"></el-backtop>
+</div>
+
+<script type="text/javascript">
+
+    var props = [{
+        label: 'ICP备案号',
+        key: 'icp',
+        value: '',
+        type: 0
+    }, {
+        label: '网站域名',
+        key: 'domain',
+        value: '',
+        type: 0
+    }, {
+        label: '手机版域名',
+        key: 'domain_mobile',
+        value: '',
+        type: 0
+    }, {
+        label: '网站名',
+        key: 'site_name',
+        value: '',
+        type: 0
+    }, {
+        label: '网站标题',
+        key: 'site_title',
+        value: '',
+        type: 0
+    }, {
+        label: '网站LOGO',
+        key: 'logo',
+        value: '',
+        type: 0
+    }, {
+        label: '网站关键字',
+        key: 'keywords',
+        value: '',
+        type: 1
+    }, {
+        label: '网站描述',
+        key: 'description',
+        value: '',
+        type: 1
+    }, {
+        label: '联系信息',
+        key: 'contact',
+        value: '',
+        type: 1
+    }, {
+        label: '标签页图标',
+        key: 'favicon',
+        value: '',
+        type: 0
+    }, {
+        label: '显示顶部条',
+        key: 'top_display',
+        value: '',
+        type: 0
+    }, {
+        label: '页头HTML',
+        key: 'header_html',
+        value: '',
+        type: 1
+    }, {
+        label: '页脚HTML',
+        key: 'footer_html',
+        value: '',
+        type: 1
+    }, {
+        label: '版权声明',
+        key: 'copyright',
+        value: '',
+        type: 1
+    }]
+
+    var datas = {{ datas|safe }};
+
+    function findItem(key) {
+        for (var i in this.props) {
+            if (this.props[i].key == key) {
+                return this.props[i]
+            }
+        }
+    }
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            form: '',
+            props: props,
+        },
+        created() {
+            var self = this;
+            datas.forEach(item => {
+                var val = findItem.call(this, item.key)
+                if (val) {
+                    val.label = item.label;
+                    val.key = item.key;
+                    val.value = item.value;
+
+                    val.type = item.type;
+                } else {
+                    self.props.push(item);
+                }
+            })
+        },
+        methods: {
+            onSubmit: function () {
+                var csrfmiddlewaretoken = document.getElementsByName('csrfmiddlewaretoken')[0].value
+                var self = this;
+                //组装数据
+                var post = {
+                    csrfmiddlewaretoken: csrfmiddlewaretoken,
+                    props: JSON.stringify(this.props)
+                }
+
+                axios({
+                    url: '/admin/settings/save',
+                    method: 'post',
+                    data: post,
+                    transformRequest: [function (data) {
+                        let ret = ''
+                        for (let it in data) {
+                            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                        }
+                        return ret
+                    }],
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(res => {
+                    if (res.data.success) {
+                        self.$notify({
+                            title: '成功',
+                            message: '保存成功',
+                            type: 'success'
+                        });
+                    } else {
+                        self.$notify({
+                            title: '错误',
+                            message: '保存失败',
+                            type: 'warning'
+                        });
+
+                    }
+                }).catch(err => {
+                    self.$notify({
+                        title: '错误',
+                        message: '服务器错误',
+                        type: 'warning'
+                    });
+                })
+
+                console.log(post)
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

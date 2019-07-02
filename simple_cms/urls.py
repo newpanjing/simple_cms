@@ -19,6 +19,8 @@ from django.urls import path
 from simple_cms import views
 
 urlpatterns = [
+    path('admin/settings/save', views.settings_save),
+    path('admin/settings', views.settings),
     path('admin/', admin.site.urls),
-    path('', views.index)
+    path('', views.index),
 ]
