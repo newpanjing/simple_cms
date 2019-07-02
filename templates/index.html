@@ -79,6 +79,7 @@
 
 <div class="container main-wrap clearfix">
     <div class="main">
+        <!-- block 1 -->
         {% block main %}
             <div class="latest">
                 <span class="iconfont icon-notice"></span>
@@ -86,6 +87,7 @@
                 <span class="date">{{ latest.create_date|date:'Y-m-d' }}</span>
             </div>
         {% endblock %}
+        <!-- block 2 -->
         <div class="clearfix">
 
             <div id="carousel">
@@ -129,6 +131,13 @@
                         </div>
                     </div>
                 {% endfor %}
+            </div>
+        </div>
+        <!-- block 3 -->
+        <div class="block">
+            <div class="head clearfix">
+                <div class="title">鸟类百科</div>
+                <div class="more">更多</div>
             </div>
         </div>
     </div>
