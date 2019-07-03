@@ -81,8 +81,12 @@ def settings_save(req):
 
 
 def aritlce(req, category, id):
+    a = Article.objects.get(id=id)
+    a.hits += 1
+    a.save()
+
     return render(req, 'article.html', {
-        'article': Article.objects.get(id=id)
+        'article': a
     })
 
 

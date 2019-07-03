@@ -1,38 +1,67 @@
 {% load static cmstags %}
-{% get_new_article 6 as new_articles %}
-<div class="item">
-    <div class="head-title">热门推荐</div>
-    <div class="side-article">
-        {% for item in new_articles %}
-            {% if forloop.counter0 == 0 %}
-                <div class="first">
-                    <a href="{% url 'article' item.category__alias item.id %}">
-                        <img src="{{ item.cover }}">
-                    </a>
-                    <div class="info">
-                        <div class="date"><span
-                                class="iconfont icon-date"></span>{{ item.create_date|date:'Y-m-d' }}
-                        </div>
-                        <div class="title"><a
-                                href="{% url 'article' item.category__alias item.id %}">{{ item.title }}</a></div>
-                    </div>
 
-                </div>
-            {% else %}
-                <div class="list">
-                    <a href="{% url 'article' item.category__alias item.id %}">
-                        <div class="cover">
+{#<div class="item">#}
+{#    这是广告#}
+{#</div>#}
+{% block new_article %}
+    <div class="item">
+        <div class="head-title">最新推荐</div>
+        <div class="side-article">
+            {% get_new_article 6 as new_articles %}
+            {% for item in new_articles %}
+                {% if forloop.counter0 == 0 %}
+                    <div class="first">
+                        <a href="{% url 'article' item.category__alias item.id %}">
                             <img src="{{ item.cover }}">
-                        </div>
+                        </a>
                         <div class="info">
                             <div class="date"><span
                                     class="iconfont icon-date"></span>{{ item.create_date|date:'Y-m-d' }}
                             </div>
-                            <div class="title">{{ item.title }}</div>
+                            <div class="title"><a
+                                    href="{% url 'article' item.category__alias item.id %}">{{ item.title }}</a></div>
                         </div>
+
+                    </div>
+                {% else %}
+                    <div class="list">
+
+                        <div class="cover">
+                            <a href="{% url 'article' item.category__alias item.id %}">
+                                <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'">
+                            </a>
+                        </div>
+                        <div class="info">
+                            <div class="title">
+                                <a href="{% url 'article' item.category__alias item.id %}"
+                                   target="_blank">{{ item.title }}</a>
+                            </div>
+                            <div class="date"><span
+                                    class="iconfont icon-date"></span>{{ item.create_date|date:'Y-m-d' }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block hot_article %}
+    <div class="item hot-article">
+        <div class="head-title">热门排行</div>
+        <div class="side-article">
+            {% get_hot_article 10 as hot_articles %}
+            {% for item in hot_articles %}
+                <div class="link">
+                    <a href="{% url 'article' item.category__alias item.id %}" target="_blank">
+                    <span class="round"
+                          style="background: rgba(68,147,255,{{ forloop.counter0|get_opacity }})">{{ forloop.counter }}</span>
+                        <span>{{ item.title }}</span>
                     </a>
                 </div>
-            {% endif %}
-        {% endfor %}
+            {% endfor %}
+
+        </div>
     </div>
-</div>
+{% endblock %}

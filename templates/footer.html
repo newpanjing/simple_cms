@@ -1,0 +1,27 @@
+{% load static cmstags %}
+{% load_settings as settings %}
+{% load_links as links %}
+<div class="footer">
+    <div class="container">
+        {% if links|length != 0 %}
+            <div class="links">
+                <div>友情链接</div>
+                <div>
+                    {% for link in links %}
+                        <a href="{{ link.url }}" target="_blank">{{ link.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="copyright">
+            © {% get_year %} <a href="/" title="{{ settings.site_name }}">{{ settings.site_name }}</a>
+            {% if settings.icp %}
+                ICP备案号：<a href="http://beian.miit.gov.cn" target="_blank">{{ settings.icp }}</a>
+            {% endif %}
+            {{ settings.copyright }}
+        </div>
+    </div>
+    {% if settings.footer_html %}
+        {{ settings.footer_html|safe }}
+    {% endif %}
+</div>

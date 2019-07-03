@@ -42,5 +42,30 @@ def filter_img(val):
 
 @register.simple_tag
 def get_new_article(size=10):
-    return Article.objects.order_by('-id').values('id', 'title', 'create_date', 'category__alias', 'category__name',
+    return Article.objects.order_by('-id').values('id', 'title', 'create_date',
+                                                  'category__alias', 'category__name',
                                                   'cover', 'hits', 'summary')[:size]
+
+
+@register.simple_tag
+def get_hot_article(size=10):
+    return Article.objects.order_by('-hits').values('id', 'title', 'create_date',
+                                                    'category__alias', 'category__name',
+                                                    'cover', 'hits', 'summary')[:size]
+
+
+@register.filter
+def get_opacity(val):
+    return (11 - val) / 10
+
+
+@register.simple_tag
+def get_prev(id):
+    """获取前一篇文章"""
+    return Article.objects.filter(id__lt=id).order_by('-id').values('id', 'title', 'category__alias').first()
+
+
+@register.simple_tag
+def get_next(id):
+    """获取前一篇文章"""
+    return Article.objects.filter(id__gt=id).order_by('id').values('id', 'title', 'category__alias').first()

@@ -153,17 +153,17 @@ a {
 
 .container {
   .main {
-    width: calc(100% - 280px - 40px);
+    width: calc(100% - 300px - 40px);
     margin-right: 10px;
     float: left;
   }
 
   .side {
-    width: 250px;
+    width: 280px;
     float: left;
   }
 
-  .main, .side {
+  .main {
     padding: 15px;
     background: #fff;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
@@ -193,13 +193,40 @@ a {
 }
 
 .side {
+  .hot-article {
+    .link {
+      overflow: hidden;
+      .round {
+        display: inline-block;
+        margin-right: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 20px;
+        line-height: 20px;
+        text-align: center;
+        color: white;
+      }
+      line-height: 35px;
+      height: 35px;
+      white-space: nowrap;
+    }
+  }
+
   .item {
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
+    margin-bottom: 10px;
+
     .head-title {
       //float: left;
       font-size: 20px;
       color: #434A54;
       font-weight: 500;
       letter-spacing: 2px;
+      border-bottom: #ccc 1px solid;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
     }
 
   }
@@ -211,23 +238,59 @@ a {
 
     .list {
       display: table;
-      .cover{
+
+      .cover {
         display: table-cell;
-        width: 50px;
+        width: 88px;
+        height: 62px;
         vertical-align: middle;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
-      .info{
+
+      .info {
         display: table-cell;
         vertical-align: middle;
-        padding:0px 5px;
+        padding: 0px 10px;
+
+        .title {
+          height: 44px;
+          line-height: 22px;
+          overflow: hidden;
+          font-size: 14px;
+          color: #434A54;
+          font-weight: 300;
+          //margin-bottom: 7px;
+        }
+
+        .date {
+          color: #999;
+          font-size: 12px;
+
+          .iconfont {
+            margin-right: 5px;
+            font-size: 12px;
+          }
+        }
       }
 
     }
 
     .first {
       position: relative;
-      width: 250px;
+      //width: 250px;
       height: 200px;
+
+      .date {
+        font-size: 14px;
+
+        .iconfont {
+          margin-right: 5px;
+        }
+      }
 
       img {
         width: 100%;

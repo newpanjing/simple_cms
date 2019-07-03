@@ -1,8 +1,11 @@
 {% extends 'index.html' %}
-{% load static %}
+{% load static cmstags %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/article.css' %}"/>
+{% endblock %}
+{% block js %}
+
 {% endblock %}
 
 {% block seo %}
@@ -17,7 +20,7 @@
         <h1 class="title">{{ article.title }}</h1>
         <div class="info">
             <span class="iconfont icon-book"></span>
-            <span>{{ article.category.name }}</span>
+            <span><a href="{% url 'category' article.category.alias %}" target="_blank">{{ article.category.name }}</a></span>
 
             <span class="iconfont icon-date"></span>
             <span>{{ article.create_date }}</span>
@@ -28,6 +31,23 @@
 
         <div class="content">
             {{ article.content|safe }}
+        </div>
+        <div class="prev-next">
+            {% get_prev article.id as prev %}
+            {% if prev %}
+                <div class="item">
+                    <span>上一篇：</span>
+                    <a href="{% url 'article' prev.category__alias prev.id %}">{{ prev.title }}</a>
+                </div>
+            {% endif %}
+
+            {% get_next article.id as next %}
+            {% if next %}
+                <div class="item">
+                    <span>下一篇：</span>
+                    <a href="{% url 'article' next.category__alias next.id %}">{{ next.title }}</a>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

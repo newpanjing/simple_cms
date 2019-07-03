@@ -129,16 +129,15 @@ a:hover {
   margin-top: 20px;
 }
 .container .main {
-  width: calc(100% - 280px - 40px);
+  width: calc(100% - 300px - 40px);
   margin-right: 10px;
   float: left;
 }
 .container .side {
-  width: 250px;
+  width: 280px;
   float: left;
 }
-.container .main,
-.container .side {
+.container .main {
   padding: 15px;
   background: #fff;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
@@ -160,11 +159,36 @@ a:hover {
 .block .head .more {
   float: right;
 }
+.side .hot-article .link {
+  overflow: hidden;
+  line-height: 35px;
+  height: 35px;
+  white-space: nowrap;
+}
+.side .hot-article .link .round {
+  display: inline-block;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  line-height: 20px;
+  text-align: center;
+  color: white;
+}
+.side .item {
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
+  margin-bottom: 10px;
+}
 .side .item .head-title {
   font-size: 20px;
   color: #434A54;
   font-weight: 500;
   letter-spacing: 2px;
+  border-bottom: #ccc 1px solid;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 .side .side-article .first,
 .side .side-article .list {
@@ -175,18 +199,44 @@ a:hover {
 }
 .side .side-article .list .cover {
   display: table-cell;
-  width: 50px;
+  width: 88px;
+  height: 62px;
   vertical-align: middle;
+}
+.side .side-article .list .cover img {
+  width: 100%;
+  height: 100%;
 }
 .side .side-article .list .info {
   display: table-cell;
   vertical-align: middle;
-  padding: 0px 5px;
+  padding: 0px 10px;
+}
+.side .side-article .list .info .title {
+  height: 44px;
+  line-height: 22px;
+  overflow: hidden;
+  font-size: 14px;
+  color: #434A54;
+  font-weight: 300;
+}
+.side .side-article .list .info .date {
+  color: #999;
+  font-size: 12px;
+}
+.side .side-article .list .info .date .iconfont {
+  margin-right: 5px;
+  font-size: 12px;
 }
 .side .side-article .first {
   position: relative;
-  width: 250px;
   height: 200px;
+}
+.side .side-article .first .date {
+  font-size: 14px;
+}
+.side .side-article .first .date .iconfont {
+  margin-right: 5px;
 }
 .side .side-article .first img {
   width: 100%;
