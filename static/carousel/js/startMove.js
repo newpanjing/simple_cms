@@ -191,8 +191,7 @@ window.onload=function(){
 		}else if(iNow>=iNowUlLeft+7){
 			iNowUlLeft=iNow-6;
 		}
-		oPrev.className=iNowUlLeft==0?'btn':'btn showBtn';
-		oNext.className=iNowUlLeft==(aIcoLi.length-7)?'btn':'btn showBtn';
+
 		oUlleft();
 		tab();
 	}

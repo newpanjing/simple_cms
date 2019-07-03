@@ -12,7 +12,9 @@ def index(request):
         'latest': Article.objects.values('id', 'title', 'category__alias', 'create_date').last(),
         'tops': Article.objects.filter(top=True).order_by('-update_date').values('id', 'category__alias', 'title',
                                                                                  'cover')[:6],
-        'news': Article.objects.order_by('-id').values('title', 'category__alias', 'id', 'summary')[:3]
+        'news': Article.objects.order_by('-id').values('title', 'category__alias', 'id', 'summary')[:3],
+        'articles': Article.objects.order_by('-id').values('title', 'id', 'category__alias', 'cover', 'summary',
+                                                           'category__name', 'create_date', 'hits')[:16]
     })
 
 
@@ -52,4 +54,10 @@ def settings_save(req):
 def aritlce(req, category, id):
     return render(req, 'article.html', {
         'article': Article.objects.get(id=id)
+    })
+
+
+def category(req, category_alias):
+    return render(req, 'category.html', {
+
     })
