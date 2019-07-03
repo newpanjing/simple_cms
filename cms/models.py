@@ -10,6 +10,7 @@ class Category(models.Model):
     alias = models.CharField(verbose_name='别名', max_length=128, help_text='url连接名', db_index=True)
 
     sort = models.IntegerField(verbose_name='排序', default=0, help_text='越小排越前')
+    home_display = models.BooleanField(verbose_name='首页显示', default=False, help_text='首页显示文章')
 
     create_date = models.DateTimeField(auto_now_add=True, verbose_name='创建时间', null=True, blank=True)
     update_date = models.DateTimeField(auto_now=True, verbose_name='更新时间', null=True, blank=True)

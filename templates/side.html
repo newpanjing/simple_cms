@@ -1,0 +1,38 @@
+{% load static cmstags %}
+{% get_new_article 6 as new_articles %}
+<div class="item">
+    <div class="head-title">热门推荐</div>
+    <div class="side-article">
+        {% for item in new_articles %}
+            {% if forloop.counter0 == 0 %}
+                <div class="first">
+                    <a href="{% url 'article' item.category__alias item.id %}">
+                        <img src="{{ item.cover }}">
+                    </a>
+                    <div class="info">
+                        <div class="date"><span
+                                class="iconfont icon-date"></span>{{ item.create_date|date:'Y-m-d' }}
+                        </div>
+                        <div class="title"><a
+                                href="{% url 'article' item.category__alias item.id %}">{{ item.title }}</a></div>
+                    </div>
+
+                </div>
+            {% else %}
+                <div class="list">
+                    <a href="{% url 'article' item.category__alias item.id %}">
+                        <div class="cover">
+                            <img src="{{ item.cover }}">
+                        </div>
+                        <div class="info">
+                            <div class="date"><span
+                                    class="iconfont icon-date"></span>{{ item.create_date|date:'Y-m-d' }}
+                            </div>
+                            <div class="title">{{ item.title }}</div>
+                        </div>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

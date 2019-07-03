@@ -6,6 +6,10 @@ html {
   color: #444;
   background: #F2F2F2;
 }
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
 a {
   text-decoration: none;
   color: #444444;
@@ -20,6 +24,7 @@ a:hover {
 }
 .container {
   max-width: 1200px;
+  min-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -95,15 +100,20 @@ a:hover {
   background-color: #3E3E3E;
   margin-top: 20px;
 }
-.footer .copyright {
+.footer .copyright,
+.footer .links {
   color: #8F8F8F;
   min-height: 35px;
   line-height: 35px;
   font-size: 14px;
   padding: 20px 0px;
 }
-.footer .copyright a {
+.footer .copyright a,
+.footer .links a {
   color: #8F8F8F;
+}
+.footer .links {
+  padding: 0;
 }
 .clearfix {
   display: block;
@@ -133,17 +143,194 @@ a:hover {
   background: #fff;
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
 }
-.aritle-item .item {
+.block {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.block .head .title {
+  float: left;
+  display: block;
+  font-size: 20px;
+  color: #434A54;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding-left: 10px;
+  border-left: #4593FF 5px solid;
+}
+.block .head .more {
+  float: right;
+}
+.side .item .head-title {
+  font-size: 20px;
+  color: #434A54;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+.side .side-article .first,
+.side .side-article .list {
+  margin-bottom: 20px;
+}
+.side .side-article .list {
+  display: table;
+}
+.side .side-article .list .cover {
+  display: table-cell;
+  width: 50px;
+  vertical-align: middle;
+}
+.side .side-article .list .info {
+  display: table-cell;
+  vertical-align: middle;
+  padding: 0px 5px;
+}
+.side .side-article .first {
+  position: relative;
+  width: 250px;
+  height: 200px;
+}
+.side .side-article .first img {
+  width: 100%;
+  height: 100%;
+}
+.side .side-article .first .info {
+  padding: 5px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+.side .side-article .first .info .title {
+  font-size: 14px;
+  color: #fff;
+  height: 25px;
+  line-height: 25px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.side .side-article .first .info a {
+  color: white;
+}
+.article-item {
+  border: 1px solid #ededed;
+  border-left: 0;
+  background: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.article-item .summary {
+  height: 50px;
+  line-height: 25px;
+  overflow: hidden;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 10px;
+}
+.article-item .info {
+  font-size: 14px;
+  color: #999;
+  padding-left: 10px;
+}
+.article-item .info a {
+  color: #999;
+}
+.article-item .info .iconfont {
+  margin-left: 20px;
+}
+.article-item .info .iconfont:first-child {
+  margin-left: 0px;
+}
+.article-item h5 {
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+.article-item h5 a {
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #434A54;
+}
+.article-item h5 a:hover {
+  color: #4593FF;
+}
+.article-item:hover {
+  border-color: #5694f7;
+}
+.article-item * {
+  word-wrap: break-word;
+  word-break: normal;
+}
+.article-item .cover {
   float: left;
   width: 276px;
   height: 166px;
 }
-.aritle-item .item img {
+.article-item .cover img {
   width: 100%;
   height: 100%;
 }
-.aritle-item .content {
-  float: left;
+.article-item .content {
+  float: right;
+  width: calc(100% - 286px);
+}
+.atlas-wrap {
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
+  margin-top: 20px;
+}
+.atlas {
+  display: table;
+}
+.atlas .item {
+  position: relative;
+  display: table-cell;
+  width: 25%;
+  padding: 10px;
+}
+.atlas .item .play {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  background: url("../image/play.png") no-repeat;
+  top: 76.5px;
+  left: 50%;
+  margin-left: -17.5px;
+}
+.atlas .item .content .title {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #434A54;
+  height: 50px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.atlas .item .content .info {
+  font-size: 14px;
+  color: #999;
+}
+.atlas .item .content .info a {
+  color: #999;
+}
+.atlas .item .content .info .iconfont {
+  margin-left: 10px;
+}
+.atlas .item .content .info .iconfont:first-child {
+  margin-left: 0px;
+}
+.atlas .item .cover {
+  height: 170px;
+  cursor: pointer;
+}
+.atlas .item .cover img {
+  width: 100%;
+  height: 100%;
 }
 .latest {
   margin-bottom: 10px;
@@ -199,22 +386,5 @@ a:hover {
 #carousel {
   width: 500px;
   float: left;
-}
-.block {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-.block .head .title {
-  float: left;
-  display: block;
-  font-size: 20px;
-  color: #434A54;
-  font-weight: 500;
-  letter-spacing: 2px;
-  padding-left: 10px;
-  border-left: #4593FF 5px solid;
-}
-.block .head .more {
-  float: right;
 }
 /*# sourceMappingURL=index.css.map */

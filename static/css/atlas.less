@@ -1,0 +1,64 @@
+.atlas-wrap {
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
+  margin-top: 20px;
+}
+
+.atlas {
+  display: table;
+
+  .item {
+    position: relative;
+    display: table-cell;
+    width: 25%;
+    padding: 10px;
+
+    .play {
+      position: absolute;
+      width: 35px;
+      height: 35px;
+      background: url("../image/play.png") no-repeat;
+      top: 76.5px;
+      left: 50%;
+      margin-left: -17.5px;
+
+    }
+
+    .content {
+      .title {
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        color: #434A54;
+        height: 50px;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+
+      .info {
+        font-size: 14px;
+        color: #999;
+        a {
+          color: #999
+        }
+        .iconfont{
+          margin-left: 10px;
+          &:first-child{
+            margin-left: 0px;
+          }
+        }
+      }
+    }
+
+    .cover {
+      height: 170px;
+      cursor: pointer;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

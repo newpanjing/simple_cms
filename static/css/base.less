@@ -7,6 +7,11 @@ body, html {
   background: #F2F2F2;
 }
 
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 a {
   text-decoration: none;
   color: #444444;
@@ -24,6 +29,7 @@ a {
 
 .container {
   max-width: 1200px;
+  min-width: 1000px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -111,7 +117,8 @@ a {
   background-color: #3E3E3E;
   margin-top: 20px;
 
-  .copyright {
+
+  .copyright, .links {
     color: #8F8F8F;
     min-height: 35px;
     line-height: 35px;
@@ -121,6 +128,10 @@ a {
     a {
       color: #8F8F8F;
     }
+  }
+
+  .links {
+    padding: 0;
   }
 }
 
@@ -157,4 +168,98 @@ a {
     background: #fff;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.06);
   }
+}
+
+.block {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .head {
+    .title {
+      float: left;
+      display: block;
+      font-size: 20px;
+      color: #434A54;
+      font-weight: 500;
+      letter-spacing: 2px;
+      padding-left: 10px;
+      border-left: #4593FF 5px solid;
+    }
+
+    .more {
+      float: right;
+    }
+  }
+}
+
+.side {
+  .item {
+    .head-title {
+      //float: left;
+      font-size: 20px;
+      color: #434A54;
+      font-weight: 500;
+      letter-spacing: 2px;
+    }
+
+  }
+
+  .side-article {
+    .first, .list {
+      margin-bottom: 20px
+    }
+
+    .list {
+      display: table;
+      .cover{
+        display: table-cell;
+        width: 50px;
+        vertical-align: middle;
+      }
+      .info{
+        display: table-cell;
+        vertical-align: middle;
+        padding:0px 5px;
+      }
+
+    }
+
+    .first {
+      position: relative;
+      width: 250px;
+      height: 200px;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .info {
+        padding: 5px;
+        color: white;
+
+        .title {
+          font-size: 14px;
+          color: #fff;
+          height: 25px;
+          line-height: 25px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        a {
+          color: white;
+        }
+
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(#000, 0.5);
+      }
+    }
+
+  }
+
 }
