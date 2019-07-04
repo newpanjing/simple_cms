@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ueditor',
     'cms',
     'system'
 ]
@@ -147,6 +148,9 @@ DEFAULT_FILE_STORAGE = 'simple_cms.backends.FileStorage'
 UPLOAD_ROOT = os.path.join(BASE_DIR, 'static/upload')
 # 文件前缀路径  xxx/123.png
 UPLOAD_PATH_PREFIX = '/static/upload/'
+
+UEDITOR_UPLOAD_PREFIX = "/static/upload/"
+UEDITOR_UPLOAD_DIR = os.path.join(BASE_DIR, 'static/upload/')
 
 # 设置admin中自定义菜单
 SIMPLEUI_CONFIG = {

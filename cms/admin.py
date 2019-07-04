@@ -25,3 +25,12 @@ class BannerAdmin(admin.ModelAdmin):
     list_per_page = 10
 
     list_display = ('id', 'sort', 'article', 'cover_display')
+
+
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
+    list_per_page = 10
+    list_display = ('id', 'alias', 'title', 'keywords', 'description', 'createDate', 'display', 'side')
+    search_fields = ('title', 'alias')
+    list_filter = ('display',)
+    list_display_links = ('id', 'alias', 'title')

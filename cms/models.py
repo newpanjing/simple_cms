@@ -4,6 +4,8 @@ from django.db import models
 from django.utils.html import format_html
 from simpleui.fields import FileField
 
+from ueditor.fields import RichTextField
+
 
 class Category(models.Model):
     name = models.CharField(verbose_name='分类名', max_length=64)
@@ -28,7 +30,7 @@ class Article(models.Model):
     summary = models.CharField(verbose_name='摘要', max_length=256, null=True, blank=True)
     cover = models.FileField(verbose_name='封面', max_length=512, null=True, blank=True)
     # cover = FileField(verbose_name='封面', max_length=512, null=True, blank=True, placeholder='封面')
-    content = models.TextField(verbose_name='内容')
+    content = RichTextField(verbose_name='内容')
 
     tags = models.CharField(verbose_name='标签', max_length=128, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='分类')
@@ -67,3 +69,23 @@ class Banner(models.Model):
     class Meta:
         verbose_name = '首页推荐'
         verbose_name_plural = '首页推荐'
+
+
+class Page(models.Model):
+    alias = models.CharField(max_length=256, verbose_name='别名', db_index=True)
+    title = models.CharField(max_length=256, verbose_name='标题')
+    keywords = models.CharField(max_length=512, verbose_name='关键字', null=True, blank=True)
+    description = models.CharField(max_length=512, verbose_name='描述', null=True, blank=True)
+    content = RichTextField(verbose_name='内容', null=True, blank=False)
+    createDate = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    display = models.BooleanField(verbose_name='是否显示', default=True, db_index=True)
+    head = models.TextField(verbose_name='头部脚本', null=True, blank=True)
+    footer = models.TextField(verbose_name='尾部脚本', null=True, blank=True)
+    side = models.BooleanField(verbose_name='显示右侧边栏', default=True)
+
+    class Meta:
+        verbose_name = '页面'
+        verbose_name_plural = '页面管理'
+
+    def __str__(self):
+        return self.title

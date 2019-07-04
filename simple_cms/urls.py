@@ -19,10 +19,12 @@ from django.views.generic import RedirectView
 
 from simple_cms import views
 
+
 urlpatterns = [
     path('admin/settings/save', views.settings_save),
     path('admin/settings', views.settings),
     path('admin/', admin.site.urls),
+    path('ueditor/upload', views.ueditor_upload),
     path('favicon.ico', RedirectView.as_view(url='static/image/favicon.ico')),
     path('', views.index),
     path('<category_alias>/', views.category, name='category'),

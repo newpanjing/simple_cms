@@ -1,5 +1,7 @@
 import datetime
 from django import template
+from django.core.paginator import Paginator
+
 from system.models import *
 from cms.models import *
 import re
@@ -69,3 +71,12 @@ def get_prev(id):
 def get_next(id):
     """获取前一篇文章"""
     return Article.objects.filter(id__gt=id).order_by('id').values('id', 'title', 'category__alias').first()
+
+
+@register.simple_tag
+def get_category(alias, page=1, size=10):
+    articles = Article.objects.filter(category__alias=alias).order_by('-id').values('id', 'title', 'create_date',
+                                                                                    'category__alias', 'category__name',
+                                                                                    'cover', 'hits', 'summary')
+    paginator = Paginator(articles, size)
+    return paginator.page(page)

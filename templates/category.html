@@ -1,4 +1,38 @@
 {% extends 'index.html' %}
+{% load static cmstags %}
 {% block main %}
-分类
+    分类
+    {% get_category alias 1 10 as articles %}
+    {% for item in articles %}
+        <div class="article-item clearfix">
+            <div class="cover">
+                <a href="{% url 'article' item.category__alias item.id %}" target="_blank">
+                    <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
+                         lazyload="on" alt="{{ item.title }}">
+                </a>
+            </div>
+            <div class="content">
+                <div class="title">
+                    <h5>
+                        <a href="{% url 'article' item.category__alias item.id %}"
+                           target="_blank">{{ item.title }}</a>
+                    </h5>
+                </div>
+                <div class="summary">{{ item.summary }}</div>
+                <div class="info">
+
+                    <span class="iconfont icon-book"></span>
+                    <span><a href="{% url 'category' item.category__alias %}"
+                             target="_blank">{{ item.category__name }}</a></span>
+
+                    <span class="iconfont icon-date"></span>
+                    <span>{{ item.create_date }}</span>
+
+                    <span class="iconfont icon-yanjing"></span>
+                    <span>{{ item.hits }}</span>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}

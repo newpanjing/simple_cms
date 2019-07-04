@@ -1,7 +1,8 @@
 import json
-
+from ueditor import site
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
 from system.models import SystemConfig
 from cms.models import *
@@ -92,5 +93,10 @@ def aritlce(req, category, id):
 
 def category(req, category_alias):
     return render(req, 'category.html', {
-
+        'alias': category_alias
     })
+
+
+@csrf_exempt
+def ueditor_upload(request):
+    return site.handler(request)
