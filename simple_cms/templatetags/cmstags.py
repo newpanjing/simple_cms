@@ -163,6 +163,17 @@ def get_paginator(num_page_count, current_page, show_num, url):
 def get_all_category():
     return Category.objects.order_by('sort').values('name', 'alias')
 
+
 @register.filter
 def test(val):
     print(val)
+
+
+@register.simple_tag
+def now_utctime():
+    return sitemap_date(datetime.datetime.now())
+
+
+@register.filter
+def sitemap_date(val):
+    return (val - datetime.timedelta(hours=8)).strftime('%Y-%m-%dT%H:%M:%S+08:00')

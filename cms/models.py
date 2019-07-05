@@ -81,6 +81,9 @@ class Page(models.Model):
     description = models.CharField(max_length=512, verbose_name='描述', null=True, blank=True)
     content = RichTextField(verbose_name='内容', null=True, blank=False)
     createDate = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+
+    update_date = models.DateTimeField(auto_now=True, verbose_name='更新时间', null=True, blank=True)
+
     display = models.BooleanField(verbose_name='是否显示', default=True, db_index=True)
     head = models.TextField(verbose_name='头部脚本', null=True, blank=True)
     footer = models.TextField(verbose_name='尾部脚本', null=True, blank=True)

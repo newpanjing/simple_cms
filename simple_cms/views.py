@@ -1,4 +1,7 @@
+import datetime
 import json
+
+from django.template.loader import get_template
 from ueditor import site
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -115,3 +118,25 @@ def category(req, category_alias=None, page=1):
 @csrf_exempt
 def ueditor_upload(request):
     return site.handler(request)
+
+
+def sitemap_xsl(request):
+    engine = get_template('sitemap/sitemap.xsl')
+    return HttpResponse(content=engine.render({}), content_type="text/html")
+
+
+# sitemap
+def sitemap(request):
+    # 文章只加载前1000篇防止爆内存
+    articles = Article.objects.values('category__alias', 'id', 'update_date').all().order_by("-id")[:1000]
+    domain = request.scheme + "://" + request.META.get("HTTP_HOST")
+    categorys = Category.objects.all().values('alias').order_by("sort")
+    pages = Page.objects.filter(display=True).values('alias', 'update_date')
+    engine = get_template('sitemap/sitemap.xml')
+    content = engine.render({
+        'articles': articles,
+        'domain': domain,
+        'categorys': categorys,
+        'pages': pages
+    })
+    return HttpResponse(content=content, content_type="application/xml")

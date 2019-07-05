@@ -20,6 +20,8 @@ from django.views.generic import RedirectView
 from simple_cms import views
 
 urlpatterns = [
+    path('sitemap.xml', views.sitemap, name='sitemap'),
+    path('sitemap.xsl', views.sitemap_xsl, name='sitemap_xsl'),
     path(r'search/', include('haystack.urls')),
     path('admin/settings/save', views.settings_save),
     path('admin/settings', views.settings),

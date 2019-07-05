@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{% load static cmstags %}
+<?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:mobile="http://www.baidu.com/schemas/sitemap-mobile/1/">
+    <url>
+        <loc>{{ domain }}</loc>
+        <priority>1.0</priority>
+        <lastmod>{% now_utctime %}</lastmod>
+        <changefreq>Always</changefreq>
+    </url>
+
+    {% for item in categorys %}
+        <url>
+            <loc>{{ domain }}{% url 'category' item.alias %}</loc>
+            <priority>0.8</priority>
+            <lastmod>{% now_utctime %}</lastmod>
+            <changefreq>Always</changefreq>
+        </url>
+    {% endfor %}
+
+    {% for item in pages %}
+        <url>
+            <loc>{{ domain }}{% url 'category' item.alias %}</loc>
+            <priority>0.8</priority>
+            <lastmod>{{ item.update_date|sitemap_date }}</lastmod>
+            <changefreq>Always</changefreq>
+        </url>
+    {% endfor %}
+
+    {% for item in articles %}
+        <url>
+            <loc>{{ domain }}{% url 'article' item.category__alias item.id %}</loc>
+            <priority>0.6</priority>
+            <lastmod>{{ item.update_date|sitemap_date }}</lastmod>
+            <changefreq>Always</changefreq>
+        </url>
+    {% endfor %}
+</urlset>
