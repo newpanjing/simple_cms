@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static cmstags %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}"/>
+{% endblock %}
+{% load highlight static cmstags %}
+{% block main %}
+    <style type="text/css">
+        .keyword {
+            color: red;
+        }
+    </style>
+    <div class="block">
+        <div class="block-title">找到"<span class="keyword">{{request.GET.q  }}</span>"相关{{ page.object_list|length }}条结果</div>
+        {% if query %}
+
+            {% for item in page.object_list %}
+                <div class="article-item clearfix">
+                    <div class="cover">
+                        <a href="{% url 'article' item.object.category.alias item.object.id %}" target="_blank">
+                            <img src="{{ item.object.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
+                                 lazyload="on" alt="{{ item.object.title }}">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <h5>
+                                <a href="{% url 'article' item.object.category.alias item.object.id %}"
+                                   target="_blank">{{ item.object.title }}</a>
+                            </h5>
+                        </div>
+                        <div class="summary">
+                            {% highlight item.object.summary with query css_class "keyword" %}
+                        </div>
+                        <div class="info">
+
+                            <span class="iconfont icon-book"></span>
+                            <span><a href="{% url 'category' item.object.category.alias %}"
+                                     target="_blank">{{ item.object.category.name }}</a></span>
+
+                            <span class="iconfont icon-date"></span>
+                            <span>{{ item.object.create_date }}</span>
+
+                            <span class="iconfont icon-yanjing"></span>
+                            <span>{{ item.object.hits }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="tips">什么也没有找到，建议您换下关键词。</div>
+            {% endfor %}
+            {% get_paginator page.paginator.num_pages page.number 5 '/search?q='|safe|add:request.GET.q|add:'&page=' %}
+        {% endif %}
+    </div>
+{% endblock %}

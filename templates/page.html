@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static cmstags %}
+{% load_settings as settings %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/category.css' %}"/>
+{% endblock %}
+{% block js %}{% endblock %}
+{% block seo %}
+    <title>{{ page.title }} - {{ settings.site_title }}</title>
+    {% if page.keywords and page.description %}
+        <meta name="keywords" content="{{ page.keywords }}"/>
+        <meta name="description" content="{{ page.description }}"/>
+    {% else %}
+        <meta name="keywords" content="{{ settings.keywords }}"/>
+        <meta name="description" content="{{ settings.description }}"/>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    {{ page.content|safe }}
+{% endblock %}
+
+

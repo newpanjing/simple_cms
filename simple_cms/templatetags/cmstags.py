@@ -86,7 +86,7 @@ def get_category(alias, page=1, size=10):
                                                                        'category__alias', 'category__name',
                                                                        'cover', 'hits', 'summary')
     paginator = Paginator(articles, size)
-    url = '/{}/p'.format(alias)
+    url = '/{}/p/'.format(alias)
     if not alias:
         url = '/topic'
     return {
@@ -162,3 +162,7 @@ def get_paginator(num_page_count, current_page, show_num, url):
 @register.simple_tag
 def get_all_category():
     return Category.objects.order_by('sort').values('name', 'alias')
+
+@register.filter
+def test(val):
+    print(val)

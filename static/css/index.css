@@ -162,6 +162,11 @@ a:hover {
 .main-wrap {
   margin-top: 20px;
 }
+.container .no-side-main {
+  width: auto!important;
+  margin: 0!important;
+  float: none!important;
+}
 .container .main {
   width: calc(100% - 300px - 40px);
   margin-right: 10px;

@@ -1,18 +1,18 @@
 {% if num_pages > 1 %}
     <div class="paginator">
         <span class="rows">第{{ current_page }}/{{ num_pages }}页</span>
-        <a href="{{ url }}/1">首页</a>
+        <a href="{{ url }}1">首页</a>
         {% if prev >= 1 %}
-            <a href="{{ url }}/{{ prev }}">上一页</a>
+            <a href="{{ url }}{{ prev }}">上一页</a>
         {% endif %}
 
         {% for i in page_list %}
-            <a {% if i == current_page %} class="active" href="javascript:;" {% else %} href="{{ url }}/{{ i }}" {% endif %}>{{ i }}</a>
+            <a {% if i == current_page %} class="active" href="javascript:;" {% else %} href="{{ url }}{{ i }}" {% endif %}>{{ i }}</a>
         {% endfor %}
 
         {% if next <= num_pages %}
-            <a href="{{ url }}/{{ next }}">下一页</a>
+            <a href="{{ url }}{{ next }}">下一页</a>
         {% endif %}
-        <a href="{{ url }}/{{ num_pages }}">尾页</a>
+        <a href="{{ url }}{{ num_pages }}">尾页</a>
     </div>
 {% endif %}

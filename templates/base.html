@@ -1,0 +1,75 @@
+{% load static cmstags %}
+{% load_settings as settings %}
+{% load_navbar as navbars %}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% if settings.domain_mobile %}
+        <meta name="mobile-agent" content="format=html5; url={{ settings.domain_mobile }}">
+    {% endif %}
+    <link href="/static/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    {% block seo %}
+        <title>{{ settings.site_name }} - {{ settings.site_title }}</title>
+        {% if settings.logo %}
+            <meta property="og:type" content="image">
+            <meta property="og:image" content="{{ settings.logo }}">
+        {% endif %}
+        <meta name="keywords" content="{{ settings.keywords }}"/>
+        <meta name="description" content="{{ settings.description }}"/>
+    {% endblock %}
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_6sp7xukyqlx.css"/>
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    {% endblock %}
+    {% if settings.header_html %}
+        {{ settings.header_html|safe }}
+    {% endif %}
+    {% block basic_js %}
+        <script type="text/javascript" src="{% static '/js/core.js' %}"></script>
+    {% endblock %}
+    {% block js %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+{% include 'top.html' %}
+
+{% include 'navbar.html' %}
+
+<div class="container main-wrap clearfix">
+    {% block container %}
+        <div class="main">
+            {% block main %}
+
+            {% endblock %}
+        </div>
+        <div class="side">
+            {% block side %}
+                {% include 'side.html' %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+</div>
+{% block float-btn %}
+    <div class="float-btn">
+        {#        <div class="icon">#}
+        {#            <span class="iconfont icon-msg0"></span>#}
+        {#        </div>#}
+        <div class="icon" id="_float-btn-top">
+            <span class="iconfont icon-top"></span>
+        </div>
+    </div>
+{% endblock %}
+{% include 'footer.html' %}
+</body>
+
+</html>

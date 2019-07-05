@@ -17,8 +17,10 @@
             {% endfor %}
         </div>
         <div class="search-bar">
-            <input type="text" name="query" placeholder="请输入要搜索的内容">
-            <span class="iconfont icon-search"></span>
+            <form action="/search" method="get">
+                <input type="search" name="q" placeholder="请输入要搜索的内容" value="{{ request.GET.q }}">
+                <span class="iconfont icon-search"></span>
+            </form>
         </div>
     </div>
 </div>

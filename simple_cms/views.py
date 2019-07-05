@@ -92,11 +92,24 @@ def aritlce(req, category, id):
 
 
 def category(req, category_alias=None, page=1):
-    return render(req, 'category.html', {
-        'alias': category_alias,
-        'current_page': page,
-        'category': Category.objects.filter(alias=category_alias).first()
-    })
+    # 先找自定义页面，如果没有才是分类
+
+    p = Page.objects.filter(alias=category_alias).first()
+    if p:
+        template = 'page.html'
+
+        if not p.side:
+            template = 'page_noside.html'
+
+        return render(req, template, {
+            'page': p
+        })
+    else:
+        return render(req, 'category.html', {
+            'alias': category_alias,
+            'current_page': page,
+            'category': Category.objects.filter(alias=category_alias).first()
+        })
 
 
 @csrf_exempt

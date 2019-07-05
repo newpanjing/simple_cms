@@ -1,256 +1,195 @@
+{% extends 'base.html' %}
 {% load static cmstags %}
-{% load_settings as settings %}
-{% load_navbar as navbars %}
-<!DOCTYPE HTML>
-<html>
+{% block js %}
+    <script type="text/javascript" src="{% static 'carousel/js/startMove.js' %}"></script>
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
+{% endblock %}
+{% block main %}
+    <div class="latest">
+        <span class="iconfont icon-notice"></span>
+        <a target="_blank"
+           href="{% url 'article' latest.category__alias latest.id %}">{{ latest.title }}</a>
+        <span class="date">{{ latest.create_date|date:'Y-m-d' }}</span>
+    </div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- block 2 -->
+    <div class="clearfix">
 
-    {% if settings.domain_mobile %}
-        <meta name="mobile-agent" content="format=html5; url={{ settings.domain_mobile }}">
-    {% endif %}
-    <link href="/static/image/favicon.ico" type="image/x-icon" rel="shortcut icon">
-    {% block seo %}
-        <title>{{ settings.site_name }} - {{ settings.site_title }}</title>
-        {% if settings.logo %}
-            <meta property="og:type" content="image">
-            <meta property="og:image" content="{{ settings.logo }}">
-        {% endif %}
-        <meta name="keywords" content="{{ settings.keywords }}"/>
-        <meta name="description" content="{{ settings.description }}"/>
-    {% endblock %}
-
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_6sp7xukyqlx.css"/>
-    {% block css %}
-        <link rel="stylesheet" href="/static/css/index.css"/>
-    {% endblock %}
-    {% if settings.header_html %}
-        {{ settings.header_html|safe }}
-    {% endif %}
-    <script type="text/javascript" src="{% static '/js/core.js' %}"></script>
-    {% block js %}
-        <script type="text/javascript" src="{% static 'carousel/js/startMove.js' %}"></script>
-    {% endblock %}
-
-</head>
-
-<body>
-{% include 'top.html' %}
-
-{% include 'navbar.html' %}
-
-
-<div class="container main-wrap clearfix">
-    <div class="main">
-        <!-- block 1 -->
-        {% block main %}
-            <div class="latest">
-                <span class="iconfont icon-notice"></span>
-                <a target="_blank" href="{% url 'article' latest.category__alias latest.id %}">{{ latest.title }}</a>
-                <span class="date">{{ latest.create_date|date:'Y-m-d' }}</span>
-            </div>
-
-            <!-- block 2 -->
-            <div class="clearfix">
-
-                <div id="carousel">
-                    <div id="box">
-                        <ul id="pic_list">
-                            {% for item in tops %}
-                                <li {% if forloop.counter0 == 0 %}
-                                    style="z-index:2;opacity:1;fliter:alpha(opacity=100);"
-                                {% endif %}><a href="{% url 'article' item.category__alias item.id %}"
-                                               target="_blank"><img lazyload="on" src="{{ item.cover|filter_img }}"
-                                                                    onerror="this.src='{% static 'image/no_image.png' %}'"
-                                                                    alt=""/></a></li>
-                            {% endfor %}
-                        </ul>
-
-                        <div class="mark"></div>
-
-                        <ul id="text_list">
-                            {% for item in tops %}
-                                <li>
-                                    <h2 {% if forloop.counter0 == 0 %} class="show" {% endif %}><a
-                                            href="{% url 'article' item.category__alias item.id %}"
-                                            target="_blank">{{ item.title }}</a></h2>
-                                </li>
-                            {% endfor %}
-                        </ul>
-
-                        <div id="ico_list">
-                            <ul>
-                                {% for item in tops %}
-                                    <li {% if forloop.counter0 == 0 %} class="active" {% endif %}><a
-                                            href="javascript:void(0)"><img lazyload="on" width="64" height="34"
-                                                                           src="{{ item.cover }}"
-                                                                           alt=""/></a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="news">
-                    {% for item in news %}
-                        <div class="item">
-                            <h2><a href="{% url 'article' item.category__alias item.id %}">{{ item.title }}</a></h2>
-                            <div class="summary">
-                                {{ item.summary }}
-                            </div>
-                        </div>
+        <div id="carousel">
+            <div id="box">
+                <ul id="pic_list">
+                    {% for item in tops %}
+                        <li {% if forloop.counter0 == 0 %}
+                            style="z-index:2;opacity:1;fliter:alpha(opacity=100);"
+                        {% endif %}><a href="{% url 'article' item.category__alias item.id %}"
+                                       target="_blank"><img lazyload="on" src="{{ item.cover|filter_img }}"
+                                                            onerror="this.src='{% static 'image/no_image.png' %}'"
+                                                            alt=""/></a></li>
                     {% endfor %}
+                </ul>
+
+                <div class="mark"></div>
+
+                <ul id="text_list">
+                    {% for item in tops %}
+                        <li>
+                            <h2 {% if forloop.counter0 == 0 %} class="show" {% endif %}><a
+                                    href="{% url 'article' item.category__alias item.id %}"
+                                    target="_blank">{{ item.title }}</a></h2>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <div id="ico_list">
+                    <ul>
+                        {% for item in tops %}
+                            <li {% if forloop.counter0 == 0 %} class="active" {% endif %}><a
+                                    href="javascript:void(0)"><img lazyload="on" width="64" height="34"
+                                                                   src="{{ item.cover }}"
+                                                                   alt=""/></a></li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
-
-            {% for item in category_newest %}
-                <div class="block">
-                    <div class="head clearfix">
-                        <div class="title"><a href="{% url 'category' item.category.alias %}"
-                                              target="_blank">{{ item.category.name }}</a></div>
-                        <div class="more">
-                            <a href="{% url 'category' item.category.alias %}" target="_blank">
-                                <span class="iconfont icon-more"></span>
-                                更多
-                            </a>
-                        </div>
-                    </div>
-                    <div class="atlas">
-                        {% for item in item.articles %}
-                            <div class="item">
-                                <div class="cover">
-                                    <a href="{% url 'article' item.category__alias item.id %}"
-                                       target="_blank">
-                                        <img src="{{ item.cover }}"
-                                             onerror="this.src='{% static 'image/no_image.png' %}'"
-                                             lazyload="on" alt="{{ item.title }}">
-                                    </a>
-                                </div>
-                                <div class="content">
-                                    <div class="title">
-                                        <a href="{% url 'article' item.category__alias item.id %}"
-                                           target="_blank">{{ item.title }}</a>
-                                    </div>
-                                    <div class="info">
-                                        <span class="iconfont icon-book"></span>
-                                        <span><a href="{% url 'category' item.category__alias %}"
-                                                 target="_blank">{{ item.category__name }}</a></span>
-
-                                        <span class="iconfont icon-date"></span>
-                                        <span>{{ item.create_date|date:'y-m-d' }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+        </div>
+        <div class="news">
+            {% for item in news %}
+                <div class="item">
+                    <h2><a href="{% url 'article' item.category__alias item.id %}">{{ item.title }}</a></h2>
+                    <div class="summary">
+                        {{ item.summary }}
                     </div>
                 </div>
             {% endfor %}
-            <!-- block 3 -->
-            <div class="block">
-                <div class="head clearfix">
-                    <div class="title">最新发布</div>
-                    <div class="more">
-                        <a href="{% url 'category_all' %}" target="_blank">
-                            <span class="iconfont icon-more"></span>
-                            更多
-                        </a>
-                    </div>
+        </div>
+    </div>
+
+    {% for item in category_newest %}
+        <div class="block">
+            <div class="head clearfix">
+                <div class="title"><a href="{% url 'category' item.category.alias %}"
+                                      target="_blank">{{ item.category.name }}</a></div>
+                <div class="more">
+                    <a href="{% url 'category' item.category.alias %}" target="_blank">
+                        <span class="iconfont icon-more"></span>
+                        更多
+                    </a>
                 </div>
-                {% for item in articles %}
-                    <div class="article-item clearfix">
+            </div>
+            <div class="atlas">
+                {% for item in item.articles %}
+                    <div class="item">
                         <div class="cover">
-                            <a href="{% url 'article' item.category__alias item.id %}" target="_blank">
-                                <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
+                            <a href="{% url 'article' item.category__alias item.id %}"
+                               target="_blank">
+                                <img src="{{ item.cover }}"
+                                     onerror="this.src='{% static 'image/no_image.png' %}'"
                                      lazyload="on" alt="{{ item.title }}">
                             </a>
                         </div>
                         <div class="content">
                             <div class="title">
-                                <h5>
-                                    <a href="{% url 'article' item.category__alias item.id %}"
-                                       target="_blank">{{ item.title }}</a>
-                                </h5>
+                                <a href="{% url 'article' item.category__alias item.id %}"
+                                   target="_blank">{{ item.title }}</a>
                             </div>
-                            <div class="summary">{{ item.summary }}</div>
                             <div class="info">
-
                                 <span class="iconfont icon-book"></span>
                                 <span><a href="{% url 'category' item.category__alias %}"
                                          target="_blank">{{ item.category__name }}</a></span>
 
                                 <span class="iconfont icon-date"></span>
-                                <span>{{ item.create_date }}</span>
-
-                                <span class="iconfont icon-yanjing"></span>
-                                <span>{{ item.hits }}</span>
+                                <span>{{ item.create_date|date:'y-m-d' }}</span>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
+        </div>
+    {% endfor %}
+    <!-- block 3 -->
+    <div class="block">
+        <div class="head clearfix">
+            <div class="title">最新发布</div>
+            <div class="more">
+                <a href="{% url 'category_all' %}" target="_blank">
+                    <span class="iconfont icon-more"></span>
+                    更多
+                </a>
+            </div>
+        </div>
+        {% for item in articles %}
+            <div class="article-item clearfix">
+                <div class="cover">
+                    <a href="{% url 'article' item.category__alias item.id %}" target="_blank">
+                        <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
+                             lazyload="on" alt="{{ item.title }}">
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="title">
+                        <h5>
+                            <a href="{% url 'article' item.category__alias item.id %}"
+                               target="_blank">{{ item.title }}</a>
+                        </h5>
+                    </div>
+                    <div class="summary">{{ item.summary }}</div>
+                    <div class="info">
 
-            <div class="block">
-                <div class="head clearfix">
-                    <div class="title">精彩图集</div>
-                    <div class="more">
-                        <a href="{% url 'category_all' %}" target="_blank">
-                            <span class="iconfont icon-more"></span>
-                            更多
-                        </a>
+                        <span class="iconfont icon-book"></span>
+                        <span><a href="{% url 'category' item.category__alias %}"
+                                 target="_blank">{{ item.category__name }}</a></span>
+
+                        <span class="iconfont icon-date"></span>
+                        <span>{{ item.create_date }}</span>
+
+                        <span class="iconfont icon-yanjing"></span>
+                        <span>{{ item.hits }}</span>
                     </div>
                 </div>
-                <div class="atlas">
-                    {% for item in atlas %}
-                        <div class="item">
-                            <div class="play"></div>
-                            <div class="cover">
-                                <a href="{% url 'article' item.category__alias item.id %}"
-                                   target="_blank">
-                                    <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
-                                         lazyload="on" alt="{{ item.title }}">
-                                </a>
-                            </div>
-                            <div class="content">
-                                <div class="title">
-                                    <a href="{% url 'article' item.category__alias item.id %}"
-                                       target="_blank">{{ item.title }}</a>
-                                </div>
-                                <div class="info">
-                                    <span class="iconfont icon-book"></span>
-                                    <span><a href="{% url 'category' item.category__alias %}"
-                                             target="_blank">{{ item.category__name }}</a></span>
-
-                                    <span class="iconfont icon-date"></span>
-                                    <span>{{ item.create_date|date:'y-m-d' }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
             </div>
-        {% endblock %}
+        {% endfor %}
     </div>
 
-    <div class="side">
-        {% block side %}
-            {% include 'side.html' %}
-        {% endblock %}
-    </div>
-</div>
-{% block float-btn %}
-    <div class="float-btn">
-{#        <div class="icon">#}
-{#            <span class="iconfont icon-msg0"></span>#}
-{#        </div>#}
-        <div class="icon" id="_float-btn-top">
-            <span class="iconfont icon-top"></span>
+    <div class="block">
+        <div class="head clearfix">
+            <div class="title">精彩图集</div>
+            <div class="more">
+                <a href="{% url 'category_all' %}" target="_blank">
+                    <span class="iconfont icon-more"></span>
+                    更多
+                </a>
+            </div>
+        </div>
+        <div class="atlas">
+            {% for item in atlas %}
+                <div class="item">
+                    <div class="play"></div>
+                    <div class="cover">
+                        <a href="{% url 'article' item.category__alias item.id %}"
+                           target="_blank">
+                            <img src="{{ item.cover }}"
+                                 onerror="this.src='{% static 'image/no_image.png' %}'"
+                                 lazyload="on" alt="{{ item.title }}">
+                        </a>
+                    </div>
+                    <div class="content">
+                        <div class="title">
+                            <a href="{% url 'article' item.category__alias item.id %}"
+                               target="_blank">{{ item.title }}</a>
+                        </div>
+                        <div class="info">
+                            <span class="iconfont icon-book"></span>
+                            <span><a href="{% url 'category' item.category__alias %}"
+                                     target="_blank">{{ item.category__name }}</a></span>
+
+                            <span class="iconfont icon-date"></span>
+                            <span>{{ item.create_date|date:'y-m-d' }}</span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
-{% include 'footer.html' %}
-</body>
-
-</html>
