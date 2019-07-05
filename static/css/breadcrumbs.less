@@ -1,0 +1,41 @@
+.breadcrumbs-wrap {
+  padding: 10px;
+  border-bottom: #ccc 1px solid;
+  margin-bottom: 10px;
+
+  .breadcrumbs, .breadcrumbs li {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+  }
+
+  .breadcrumbs {
+    font-size: 14px;
+    .active{
+      color: #bbb;
+    }
+    li {
+      display: block;
+      float: left;
+
+      &:after {
+        content: '>';
+        margin-right: 10px;
+        margin-left: 10px;
+        color: #ddd;
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+    }
+
+    &:after {
+      content: ".";
+      display: block;
+      height: 0;
+      clear: both;
+      visibility: hidden;
+    }
+  }
+}

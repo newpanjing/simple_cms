@@ -24,10 +24,9 @@
         <meta name="description" content="{{ settings.description }}"/>
     {% endblock %}
 
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_neweerm1vk.css"/>
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_6sp7xukyqlx.css"/>
     {% block css %}
         <link rel="stylesheet" href="/static/css/index.css"/>
-        <link rel="stylesheet" href="/static/carousel/css/style.css"/>
     {% endblock %}
     {% if settings.header_html %}
         {{ settings.header_html|safe }}
@@ -241,6 +240,16 @@
         {% endblock %}
     </div>
 </div>
+{% block float-btn %}
+    <div class="float-btn">
+{#        <div class="icon">#}
+{#            <span class="iconfont icon-msg0"></span>#}
+{#        </div>#}
+        <div class="icon" id="_float-btn-top">
+            <span class="iconfont icon-top"></span>
+        </div>
+    </div>
+{% endblock %}
 {% include 'footer.html' %}
 </body>
 

@@ -3,11 +3,11 @@
 {% if settings.top_display == '1' %}
     <div class="top">
         <div class="container">
-            <a href="#" class="btn">
+            <a href="javascript:;" onclick="SetHome(this,window.location)" class="btn">
                 <span class="iconfont icon-home"></span>
                 <span>设为首页</span>
             </a>
-            <a href="#" class="btn">
+            <a href="javascript:;" onclick="_addFavorite()" class="btn">
                 <span class="iconfont icon-favorite"></span>
                 <span>点击收藏</span>
             </a>

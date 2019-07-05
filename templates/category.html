@@ -1,14 +1,33 @@
 {% extends 'index.html' %}
 {% load static cmstags %}
+{% load_settings as settings %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/category.css' %}"/>
 {% endblock %}
+{% block js %}{% endblock %}
+{% block seo %}
+    {% if category %}
+        <title>{{ category.name }} - {{ settings.site_title }}</title>
+    {% else %}
+        <title>全部分类 - {{ settings.site_title }}</title>
+    {% endif %}
+
+    {% if category.keywords and category.description %}
+        <meta name="keywords" content="{{ category.keywords }}"/>
+        <meta name="description" content="{{ category.description }}"/>
+    {% else %}
+        <meta name="keywords" content="{{ settings.keywords }}"/>
+        <meta name="description" content="{{ settings.description }}"/>
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     {% get_all_category as categorys %}
     <div class="all-category clearfix">
         <a href="{% url 'category_all' %}" {% if not alias %} class="active" {% endif %}>全部</a>
         {% for item in categorys %}
-            <a href="{% url 'category' item.alias %}" {% if item.alias == alias %} class='active' {% endif %}> {{ item.name }}</a>
+            <a href="{% url 'category' item.alias %}" {% if item.alias == alias %}
+               class='active' {% endif %}> {{ item.name }}</a>
         {% endfor %}
     </div>
     {% get_category alias current_page 10 as data %}

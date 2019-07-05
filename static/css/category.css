@@ -1,3 +1,28 @@
+.float-btn {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+}
+.float-btn .icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: rgba(221, 221, 221, 0.8);
+  text-align: center;
+  line-height: 50px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.3s;
+}
+.float-btn .icon:hover {
+  background-color: #ccc;
+}
+.float-btn .icon .iconfont {
+  font-size: 28px;
+}
+.float-btn #_float-btn-top {
+  opacity: 0;
+}
 body,
 html {
   margin: 0px;
@@ -35,10 +60,19 @@ a:hover {
 .top .btn:hover {
   color: #444;
 }
+.navbar-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(51, 51, 51, 0.9) !important;
+  z-index: 999;
+}
 .navbar {
   background: #333333;
   height: 68px;
   line-height: 68px;
+  transition: background-color 0.2s;
 }
 .navbar .logo {
   float: left;
@@ -158,6 +192,10 @@ a:hover {
 }
 .block .head .more {
   float: right;
+  font-size: 12px;
+}
+.block .head .more .iconfont {
+  font-size: 12px;
 }
 .side .hot-article .link {
   overflow: hidden;

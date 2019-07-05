@@ -94,7 +94,8 @@ def aritlce(req, category, id):
 def category(req, category_alias=None, page=1):
     return render(req, 'category.html', {
         'alias': category_alias,
-        'current_page': page
+        'current_page': page,
+        'category': Category.objects.filter(alias=category_alias).first()
     })
 
 
