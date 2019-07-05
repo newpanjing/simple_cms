@@ -19,7 +19,6 @@ from django.views.generic import RedirectView
 
 from simple_cms import views
 
-
 urlpatterns = [
     path('admin/settings/save', views.settings_save),
     path('admin/settings', views.settings),
@@ -27,8 +26,10 @@ urlpatterns = [
     path('ueditor/upload', views.ueditor_upload),
     path('favicon.ico', RedirectView.as_view(url='static/image/favicon.ico')),
     path('', views.index),
+    path('topic/', views.category, name='category_all'),
+    path('topic/<page>', views.category, name='category_all_page'),
     path('<category_alias>/', views.category, name='category'),
-    path('<category_alias>/p/<page>', views.category, name='category'),
+    path('<category_alias>/p/<page>', views.category, name='category_page'),
     path('<category>/<id>.html', views.aritlce, name='article'),
 
 ]

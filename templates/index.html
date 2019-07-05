@@ -112,13 +112,23 @@
                     <div class="head clearfix">
                         <div class="title"><a href="{% url 'category' item.category.alias %}"
                                               target="_blank">{{ item.category.name }}</a></div>
+                        <div class="more">
+                            <a href="{% url 'category' item.category.alias %}" target="_blank">
+                                <span class="iconfont icon-more"></span>
+                                更多
+                            </a>
+                        </div>
                     </div>
                     <div class="atlas">
                         {% for item in item.articles %}
                             <div class="item">
                                 <div class="cover">
-                                    <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
-                                         lazyload="on" alt="{{ item.title }}">
+                                    <a href="{% url 'article' item.category__alias item.id %}"
+                                       target="_blank">
+                                        <img src="{{ item.cover }}"
+                                             onerror="this.src='{% static 'image/no_image.png' %}'"
+                                             lazyload="on" alt="{{ item.title }}">
+                                    </a>
                                 </div>
                                 <div class="content">
                                     <div class="title">
@@ -144,7 +154,7 @@
                 <div class="head clearfix">
                     <div class="title">最新发布</div>
                     <div class="more">
-                        <a href="{% url 'category' 'aaa' %}" target="_blank">
+                        <a href="{% url 'category_all' %}" target="_blank">
                             <span class="iconfont icon-more"></span>
                             更多
                         </a>
@@ -186,14 +196,23 @@
             <div class="block">
                 <div class="head clearfix">
                     <div class="title">精彩图集</div>
+                    <div class="more">
+                        <a href="{% url 'category_all' %}" target="_blank">
+                            <span class="iconfont icon-more"></span>
+                            更多
+                        </a>
+                    </div>
                 </div>
                 <div class="atlas">
                     {% for item in atlas %}
                         <div class="item">
                             <div class="play"></div>
                             <div class="cover">
-                                <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
-                                     lazyload="on" alt="{{ item.title }}">
+                                <a href="{% url 'article' item.category__alias item.id %}"
+                                   target="_blank">
+                                    <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'"
+                                         lazyload="on" alt="{{ item.title }}">
+                                </a>
                             </div>
                             <div class="content">
                                 <div class="title">

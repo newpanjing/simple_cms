@@ -78,17 +78,24 @@ def get_next(id):
 
 @register.simple_tag
 def get_category(alias, page=1, size=10):
-    articles = Article.objects.filter(category__alias=alias).order_by('-id').values('id', 'title', 'create_date',
-                                                                                    'category__alias', 'category__name',
-                                                                                    'cover', 'hits', 'summary')
+    params = {}
+    if alias:
+        params['category__alias'] = alias
+
+    articles = Article.objects.filter(**params).order_by('-id').values('id', 'title', 'create_date',
+                                                                       'category__alias', 'category__name',
+                                                                       'cover', 'hits', 'summary')
     paginator = Paginator(articles, size)
+    url = '/{}/p'.format(alias)
+    if not alias:
+        url = '/topic'
     return {
         'count': paginator.count,
         'num_pages': paginator.num_pages,
         'list': paginator.page(page),
         'num_size': size,
         'current_page': page,
-        'url': '/{}/p'.format(alias)
+        'url': url
     }
 
 
@@ -150,3 +157,8 @@ def get_paginator(num_page_count, current_page, show_num, url):
         'page_list': page_list
     })
     return format_html(html)
+
+
+@register.simple_tag
+def get_all_category():
+    return Category.objects.order_by('sort').values('name', 'alias')

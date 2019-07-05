@@ -11,6 +11,9 @@ class Category(models.Model):
     name = models.CharField(verbose_name='分类名', max_length=64)
     alias = models.CharField(verbose_name='别名', max_length=128, help_text='url连接名', db_index=True)
 
+    keywords = models.CharField(max_length=512, verbose_name='关键字', null=True, blank=True)
+    description = models.CharField(max_length=512, verbose_name='描述', null=True, blank=True)
+
     sort = models.IntegerField(verbose_name='排序', default=0, help_text='越小排越前')
     home_display = models.BooleanField(verbose_name='首页显示', default=False, help_text='首页显示文章')
 

@@ -4,7 +4,13 @@
     <link rel="stylesheet" href="{% static 'css/category.css' %}"/>
 {% endblock %}
 {% block main %}
-    分类
+    {% get_all_category as categorys %}
+    <div class="all-category clearfix">
+        <a href="{% url 'category_all' %}" {% if not alias %} class="active" {% endif %}>全部</a>
+        {% for item in categorys %}
+            <a href="{% url 'category' item.alias %}" {% if item.alias == alias %} class='active' {% endif %}> {{ item.name }}</a>
+        {% endfor %}
+    </div>
     {% get_category alias current_page 10 as data %}
     {% for item in data.list %}
         <div class="article-item clearfix">
@@ -37,5 +43,5 @@
             </div>
         </div>
     {% endfor %}
-    {% get_paginator data.num_pages current_page 5 data.url %}
+    {% get_paginator data.num_pages current_page 8 data.url %}
 {% endblock %}

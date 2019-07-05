@@ -16,6 +16,13 @@
     <meta property="og:image" content="{{ article.cover }}">
 {% endblock %}
 {% block main %}
+    <div class="breadcrumbs-wrap">
+        <ul class="breadcrumb">
+            <li><a href="/">首页</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+        </ul>
+    </div>
     <div class="article">
         <h1 class="title">{{ article.title }}</h1>
         <div class="info">

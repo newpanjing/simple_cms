@@ -91,7 +91,7 @@ def aritlce(req, category, id):
     })
 
 
-def category(req, category_alias, page=1):
+def category(req, category_alias=None, page=1):
     return render(req, 'category.html', {
         'alias': category_alias,
         'current_page': page
