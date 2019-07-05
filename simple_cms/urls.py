@@ -28,6 +28,7 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='static/image/favicon.ico')),
     path('', views.index),
     path('<category_alias>/', views.category, name='category'),
+    path('<category_alias>/p/<page>', views.category, name='category'),
     path('<category>/<id>.html', views.aritlce, name='article'),
 
 ]

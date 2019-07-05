@@ -2,8 +2,8 @@
 {% load static cmstags %}
 {% block main %}
     分类
-    {% get_category alias 1 10 as articles %}
-    {% for item in articles %}
+    {% get_category alias current_page 10 as data %}
+    {% for item in data.list %}
         <div class="article-item clearfix">
             <div class="cover">
                 <a href="{% url 'article' item.category__alias item.id %}" target="_blank">
@@ -34,5 +34,5 @@
             </div>
         </div>
     {% endfor %}
-
+    {% get_paginator data.num_pages current_page 5 data.url %}
 {% endblock %}
