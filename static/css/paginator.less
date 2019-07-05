@@ -1,0 +1,27 @@
+.paginator {
+  float: left;
+  line-height: 34px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  overflow: hidden;
+  font-size: 14px;
+  border-radius: 3px;
+
+  .active {
+    background: #e3e3e3;
+    color: #222;
+  }
+
+  a, .rows {
+    float: left;
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    padding: 0px 15px;
+    border-right: #ddd 1px solid;
+  }
+
+  a:last-child {
+    border-right: none;
+  }
+}

@@ -1,5 +1,8 @@
 {% extends 'index.html' %}
 {% load static cmstags %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/category.css' %}"/>
+{% endblock %}
 {% block main %}
     分类
     {% get_category alias current_page 10 as data %}
