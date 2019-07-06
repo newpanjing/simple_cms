@@ -1,0 +1,45 @@
+{% load static cmstags %}
+{% load_settings as settings %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    {% block seo %}
+        <title>{{ settings.site_name }} - {{ settings.site_title }}</title>
+    {% endblock %}
+    {% block css %}
+        <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_qogvj3l2jhe.css"/>
+        <link rel="stylesheet" href="{% static 'mobile/css/base.css' %}"/>
+    {% endblock %}
+    {% block js %}
+        <script type="text/javascript" src="{% static 'mobile/js/query.js' %}"></script>
+        <script type="text/javascript" src="{% static 'mobile/js/core.js' %}"></script>
+    {% endblock %}
+<body>
+<div class="header-wrap">
+    <!-- 顶部广告位 -->
+    <div class="header">
+        {% block back %}
+            <div class="back"><span class="iconfont icon-back"></span></div>
+        {% endblock %}
+        <div class="title">
+            {% block title %}{{ settings.site_name }}{% endblock %}
+        </div>
+        {% block search %}
+            <div class="search"><span class="iconfont icon-3"></span></div>
+        {% endblock %}
+    </div>
+</div>
+<div class="main">
+
+    <a href="#" id="test">你好世界</a>
+
+    <div class="test-div" style="height: 50px">哈哈</div>
+    <div class="test-div" style="height: 50px">哈哈</div>
+    <div class="test-div" style="height: 50px">哈哈</div>
+    <div class="test-div" style="height: 50px">哈哈</div>
+</div>
+</body>
+</html>

@@ -87,7 +87,12 @@ class Page(models.Model):
     display = models.BooleanField(verbose_name='是否显示', default=True, db_index=True)
     head = models.TextField(verbose_name='头部脚本', null=True, blank=True)
     footer = models.TextField(verbose_name='尾部脚本', null=True, blank=True)
-    side = models.BooleanField(verbose_name='显示右侧边栏', default=True)
+    side = models.BooleanField(verbose_name='显示右侧边栏', default=True, help_text='该值在手机版无效')
+
+    type = models.IntegerField(choices=(
+        (0, '电脑'),
+        (1, '手机')
+    ), verbose_name='页面类型', default=0)
 
     class Meta:
         verbose_name = '页面'

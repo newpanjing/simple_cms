@@ -31,8 +31,8 @@ def load_links():
 
 
 @register.simple_tag
-def load_navbar():
-    return Navbar.objects.values('name', 'url').order_by('sort')
+def load_navbar(type=0):
+    return Navbar.objects.filter(type=type).values('name', 'url').order_by('sort')
 
 
 @register.simple_tag

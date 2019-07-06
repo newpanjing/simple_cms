@@ -1,0 +1,41 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+.header-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.header {
+  display: table;
+  width: 100%;
+  background-color: #5C5C5C;
+  color: white;
+}
+.header .back,
+.header .title,
+.header .search {
+  display: table-cell;
+}
+.header .title {
+  text-align: center;
+}
+.header .back,
+.header .search {
+  font-size: 18px;
+  width: 45px;
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+}
+.header .back:active,
+.header .search:active {
+  background-color: rgba(92, 92, 92, 0.8);
+}
+.main {
+  padding-top: 50px;
+}
+/*# sourceMappingURL=base.css.map */

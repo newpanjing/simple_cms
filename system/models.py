@@ -31,6 +31,11 @@ class Navbar(models.Model):
     parent_id = models.IntegerField(null=True, blank=True, verbose_name='父id')
     sort = models.IntegerField(default=0, verbose_name='排序', help_text='值越小排越前')
 
+    type = models.IntegerField(choices=(
+        (0, '电脑'),
+        (1, '手机')
+    ), verbose_name='类型', default=0)
+
     def __str__(self):
         return self.name
 

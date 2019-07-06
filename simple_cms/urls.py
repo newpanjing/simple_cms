@@ -20,6 +20,7 @@ from django.views.generic import RedirectView
 from simple_cms import views
 
 urlpatterns = [
+    path(r'mobile/', include('mobile.urls')),
     path('sitemap.xml', views.sitemap, name='sitemap'),
     path('sitemap.xsl', views.sitemap_xsl, name='sitemap_xsl'),
     path(r'search/', include('haystack.urls')),

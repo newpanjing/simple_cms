@@ -16,7 +16,8 @@ class SystemConfigAdmin(admin.ModelAdmin):
 @admin.register(Navbar)
 class NavbarAdmin(admin.ModelAdmin):
     search_fields = ('name', 'parent_id')
-    list_display = ('id', 'name', 'url', 'parent_id', 'sort')
+    list_filter = ('type',)
+    list_display = ('id', 'name', 'url', 'parent_id', 'sort', 'type')
     list_per_page = 10
 
 
