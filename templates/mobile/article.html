@@ -1,14 +1,12 @@
 {% extends 'mobile/base.html' %}
-{% load static cmstags murl %}
+{% load cmstags murl %}
 
 {% block css %}
     <link rel="stylesheet" href="{% static '/css/article.css' %}"/>
 {% endblock %}
 {% block js %}
 {% endblock %}
-{% block back %}
-    <div class="back"><a href="{% get_category_url alias %}"><span class="iconfont icon-back"></span></a></div>
-{% endblock %}
+
 {% block seo %}
     <title>{{ article.title }}- {{ settings.site_name }}</title>
     <meta name="keywords" content="{{ article.title }}"/>
@@ -16,6 +14,28 @@
     <meta property="og:type" content="image">
     <meta property="og:image" content="{{ article.cover }}">
 {% endblock %}
+{% block navbar %}
+    <div class="breadcrumbs">
+        <a href="{% get_index_url %}">首页</a>
+        <a href="{% get_category_url article.category.alias %}">{{ article.category.name }}</a>
+        <span>正文</span>
+    </div>
+{% endblock %}
 {% block main %}
-    {{ article.content|safe }}
+    <div class="content">
+        <h2 class="title">{{ article.title }}</h2>
+        <div class="info">
+            <span class="iconfont icon-book"></span>
+            <span><a href="{% get_category_url article.category.alias %}">{{ article.category.name }}</a></span>
+
+            <span class="iconfont icon-date"></span>
+            <span>{{ article.create_date }}</span>
+
+            <span class="iconfont icon-yanjing"></span>
+            <span>{{ article.hits }}</span>
+        </div>
+        <div class="article">
+            {{ article.content|safe }}
+        </div>
+    </div>
 {% endblock %}

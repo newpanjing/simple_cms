@@ -3,9 +3,14 @@ body {
   margin: 0px;
   padding: 0px;
   height: 100%;
-  font: 14px/1.6 'Microsoft YaHei', Hei, arial, sans-serif;
+  font-family: "SF Pro SC", "SF Pro Display", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
   color: #4C4C4C;
   background: #f3f3f3;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
 }
 a {
   text-decoration: none;
@@ -58,6 +63,9 @@ a {
   overflow-y: hidden;
   overflow-x: auto;
   width: auto;
+}
+.navbar .active {
+  color: #4593FF;
 }
 .navbar a {
   display: inline-block;
@@ -210,5 +218,24 @@ a {
 .paginator .active {
   background-color: #4593FF;
   color: white;
+}
+.breadcrumbs {
+  background-color: #eee;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  padding: 5px;
+}
+.breadcrumbs a {
+  color: #444;
+}
+.breadcrumbs a:after {
+  content: '>';
+  color: #bbb;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.breadcrumbs span {
+  color: #bbb;
 }
 /*# sourceMappingURL=category.css.map */

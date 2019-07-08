@@ -32,3 +32,8 @@ def static(url):
 @register.simple_tag
 def get_article_url(alias, id):
     return '/{}/{}/{}.html'.format(ROOT, alias, id)
+
+
+@register.simple_tag
+def get_index_url():
+    return '/{}'.format(ROOT)

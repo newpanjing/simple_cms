@@ -24,7 +24,7 @@
     <!-- 顶部广告位 -->
     <div class="header">
         {% block back %}
-            <div class="back"><span class="iconfont icon-back"></span></div>
+            <div class="back"><a href="javascript:history.back(-1);"><span class="iconfont icon-back"></span></a></div>
         {% endblock %}
         <div class="title">
             {% block title %}{{ settings.site_name }}{% endblock %}

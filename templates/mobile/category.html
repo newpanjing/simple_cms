@@ -18,15 +18,24 @@
         <meta name="description" content="{{ settings.description }}"/>
     {% endif %}
 {% endblock %}
-{% block back %}
-    <div class="back"><a href="/mobile"><span class="iconfont icon-back"></span></a></div>
+{% block navbar %}
+    <div class="navbar">
+
+        {% get_all_category as categorys %}
+        <a {% if alias == 'topic' %} class="active" {% endif %} href="{% get_category_url 'topic' %}">全部</a>
+        {% for item in categorys %}
+            <a {% if alias == item.alias %} class="active" {% endif %} href="{% get_category_url item.alias %}">{{ item.name }}</a>
+        {% endfor %}
+
+    </div>
 {% endblock %}
+
 {% block main %}
     {% get_category category.alias current_page 20 as data %}
     <div class="block">
         <div class="head-title">{{ category.name|default:'全部' }}</div>
         {% for item in data.list %}
-            <a href="{% get_article_url item.category__alias item.id  %}" class="item">
+            <a href="{% get_article_url item.category__alias item.id %}" class="item">
                 <div class="cover">
                     <img src="{{ item.cover }}" onerror="this.src='/static/image/no_image.png'">
                 </div>
