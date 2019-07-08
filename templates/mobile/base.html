@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     {% endblock %}
     {% block js %}
-{#        <script type="text/javascript" src="{% static 'js/core.js' %}"></script>#}
+        {#        <script type="text/javascript" src="{% static 'js/core.js' %}"></script>#}
     {% endblock %}
 <body>
 <div class="header-wrap">
@@ -28,8 +28,12 @@
         <div class="title">
             {% block title %}{{ settings.site_name }}{% endblock %}
         </div>
-        {% block search %}
-{#            <div class="search"><span class="iconfont icon-3"></span></div>#}
+        {% block home %}
+            <div class="search">
+                <a href="{% get_index_url %}">
+                    <span class="iconfont icon-home"></span>
+                </a>
+            </div>
         {% endblock %}
     </div>
 </div>
