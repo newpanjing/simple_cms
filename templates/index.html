@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}"/>
 {% endblock %}
 {% block main %}
-    <div class="latest">
-        <span class="iconfont icon-notice"></span>
-        <a target="_blank"
-           href="{% url 'article' latest.category__alias latest.id %}">{{ latest.title }}</a>
-        <span class="date">{{ latest.create_date|date:'Y-m-d' }}</span>
-    </div>
 
+    {% if latest %}
+        <div class="latest">
+            <span class="iconfont icon-notice"></span>
+            <a target="_blank"
+               href="{% url 'article' latest.category__alias latest.id %}">{{ latest.title }}</a>
+            <span class="date">{{ latest.create_date|date:'Y-m-d' }}</span>
+        </div>
+    {% endif %}
     <!-- block 2 -->
     <div class="clearfix">
 

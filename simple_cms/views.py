@@ -17,15 +17,15 @@ def index(request):
     atlas_size = 4
     atlas = []
     count = Article.objects.count()
-
-    # 随机推荐4个
-    for i in range(0, atlas_size):
-        index = random.randint(0, count - 1)
-        r = \
-            Article.objects.values('cover', 'id', 'category__name', 'category__alias', 'title', 'summary',
-                                   'create_date')[
-                index]
-        atlas.append(r)
+    if count > 0:
+        # 随机推荐4个
+        for i in range(0, atlas_size):
+            index = random.randint(0, count - 1)
+            r = \
+                Article.objects.values('cover', 'id', 'category__name', 'category__alias', 'title', 'summary',
+                                       'create_date')[
+                    index]
+            atlas.append(r)
 
     # 每个分类显示4篇文章
     category_newest = []
