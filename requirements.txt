@@ -7,3 +7,5 @@ jieba
 Whoosh
 django-haystack
 ueditor
+requests
+beautifulsoup4
