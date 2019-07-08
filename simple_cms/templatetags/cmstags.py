@@ -1,5 +1,6 @@
 import datetime
 import math
+import random
 
 from django import template
 from django.core.paginator import Paginator
@@ -50,6 +51,30 @@ def get_new_article(size=10):
     return Article.objects.order_by('-id').values('id', 'title', 'create_date',
                                                   'category__alias', 'category__name',
                                                   'cover', 'hits', 'summary')[:size]
+
+
+@register.simple_tag
+def get_random_article(size=10):
+    count = Article.objects.count()
+
+    ids = []
+    index = 0
+
+    # 数据库随机查询性能过低
+    while index < size:
+        id = random.randint(0, count - 1)
+        if not id in ids:
+            ids.append(id)
+            index += 1
+
+    articles = []
+    for id in ids:
+        r = Article.objects.values('id', 'title', 'create_date',
+                                   'category__alias', 'category__name',
+                                   'cover', 'hits', 'summary')[id]
+        articles.append(r)
+
+    return articles
 
 
 @register.simple_tag

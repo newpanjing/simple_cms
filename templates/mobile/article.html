@@ -56,4 +56,34 @@
             {% endif %}
         </div>
     </div>
+
+    <!-- hot article -->
+
+    {% get_random_article 10 as articles %}
+    <div class="block">
+        <div class="head-title">热门文章</div>
+        {% for item in articles %}
+            <a href="{% get_article_url item.category__alias item.id %}" class="item">
+                <div class="cover">
+                    <img src="{{ item.cover }}" onerror="this.src='/static/image/no_image.png'">
+                </div>
+                <div class="info">
+                    <div class="title">{{ item.title }}</div>
+                    <div class="summary">{{ item.summary|slice:':20' }}</div>
+                    <div class="time">
+                            <span class="date">
+                                <span class="iconfont icon-date"></span>
+                                <span>{{ item.create_date|date:'Y-m-d' }}</span>
+                            </span>
+                        <span class="hits">
+                                <span class="iconfont icon-yanjing"></span>
+                                <span>{{ item.hits }}</span>
+                            </span>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+
+    </div>
+
 {% endblock %}
