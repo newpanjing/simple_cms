@@ -2,3 +2,4 @@
 /venv/
 .vscode
 .idea/
+/simple_cms/whoosh_index/
