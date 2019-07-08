@@ -11,10 +11,12 @@
                 <span class="iconfont icon-favorite"></span>
                 <span>点击收藏</span>
             </a>
-            <a href="#" class="btn">
-                <span class="iconfont icon-phone"></span>
-                <span>手机版</span>
-            </a>
+            {% if settings.domain_mobile %}
+                <a href="{{ settings.domain_mobile }}" class="btn">
+                    <span class="iconfont icon-phone"></span>
+                    <span>手机版</span>
+                </a>
+            {% endif %}
         </div>
     </div>
 {% endif %}
