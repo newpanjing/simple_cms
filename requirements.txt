@@ -9,3 +9,4 @@ django-haystack
 ueditor
 requests
 beautifulsoup4
+lxml

@@ -10,7 +10,7 @@ from cms.models import *
 import requests
 from bs4 import BeautifulSoup
 
-for i in range(103, 157):
+for i in range(1, 157):
     try:
         print('采集第：{}篇'.format(i))
         url = 'http://www.178bird.com/article-{}-1.html'.format(i)

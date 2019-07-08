@@ -180,35 +180,3 @@ a {
   margin: 10px;
   color: #333;
 }
-.paginator {
-  padding: 20px;
-  width: 370px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.paginator:after {
-  display: block;
-  content: '';
-  clear: both;
-}
-.paginator a {
-  display: block;
-  float: left;
-  margin-right: 10px;
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  background-color: #ccc;
-  border-radius: 15px;
-  color: #333;
-}
-.paginator .iconfont {
-  font-size: 14px;
-  color: #333;
-}
-.paginator .active {
-  background-color: #4593FF;
-  color: white;
-}
-/*# sourceMappingURL=category.css.map */
