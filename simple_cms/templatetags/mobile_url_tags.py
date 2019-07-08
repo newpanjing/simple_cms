@@ -1,7 +1,5 @@
 from django import template
 
-from templatetags.cmstags import register
-
 register = template.Library()  # 这一句必须这样写
 
 ROOT = 'mobile'

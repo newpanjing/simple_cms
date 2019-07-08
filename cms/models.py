@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 from django.utils.html import format_html
-from simpleui.fields import FileField
 
 from ueditor.fields import RichTextField
 

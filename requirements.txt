@@ -6,3 +6,4 @@ django-simpleui==2.1.5
 jieba
 Whoosh
 django-haystack
+ueditor
