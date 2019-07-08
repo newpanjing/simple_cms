@@ -37,5 +37,23 @@
         <div class="article">
             {{ article.content|safe }}
         </div>
+
+        <div class="prev-next">
+            {% get_prev article.id as prev %}
+            {% if prev %}
+                <div class="item">
+                    <span>上一篇：</span>
+                    <a href="{% get_article_url prev.category__alias prev.id %}">{{ prev.title }}</a>
+                </div>
+            {% endif %}
+
+            {% get_next article.id as next %}
+            {% if next %}
+                <div class="item">
+                    <span>下一篇：</span>
+                    <a href="{% get_article_url next.category__alias next.id %}">{{ next.title }}</a>
+                </div>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
