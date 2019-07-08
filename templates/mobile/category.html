@@ -1,0 +1,52 @@
+{% extends 'mobile/base.html' %}
+{% load static cmstags murl %}
+{% block css %}
+    <link rel="stylesheet" href="{% static '/css/category.css' %}"/>
+{% endblock %}
+{% block seo %}
+    {% if category %}
+        <title>{{ category.name }} - {{ settings.site_title }}</title>
+    {% else %}
+        <title>全部分类 - {{ settings.site_title }}</title>
+    {% endif %}
+
+    {% if category.keywords and category.description %}
+        <meta name="keywords" content="{{ category.keywords }}"/>
+        <meta name="description" content="{{ category.description }}"/>
+    {% else %}
+        <meta name="keywords" content="{{ settings.keywords }}"/>
+        <meta name="description" content="{{ settings.description }}"/>
+    {% endif %}
+{% endblock %}
+{% block back %}
+    <div class="back"><a href="/mobile"><span class="iconfont icon-back"></span></a></div>
+{% endblock %}
+{% block main %}
+    {% get_category category.alias current_page 20 as data %}
+    <div class="block">
+        <div class="head-title">{{ category.name|default:'全部' }}</div>
+        {% for item in data.list %}
+            <a href="{% get_article_url item.category__alias item.id  %}" class="item">
+                <div class="cover">
+                    <img src="{{ item.cover }}" onerror="this.src='/static/image/no_image.png'">
+                </div>
+                <div class="info">
+                    <div class="title">{{ item.title }}</div>
+                    <div class="summary">{{ item.summary|slice:':20' }}</div>
+                    <div class="time">
+                            <span class="date">
+                                <span class="iconfont icon-date"></span>
+                                <span>{{ item.create_date|date:'Y-m-d' }}</span>
+                            </span>
+                        <span class="hits">
+                                <span class="iconfont icon-yanjing"></span>
+                                <span>{{ item.hits }}</span>
+                            </span>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+        {% get_category_page category.alias as url %}
+        {% get_mobile_paginator data.num_pages current_page 5 url %}
+    </div>
+{% endblock %}

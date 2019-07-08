@@ -1,0 +1,12 @@
+{% load static cmstags %}
+{% load_settings as settings %}
+{% load_links as links %}
+<div class="footer">
+    <div class="site">{{ settings.site_name }} © {% get_year %}</div>
+    {% if settings.icp %}
+        ICP备案号：<a href="http://beian.miit.gov.cn" target="_blank">{{ settings.icp }}</a>
+    {% endif %}
+</div>
+{% if settings.footer_html %}
+    {{ settings.footer_html|safe }}
+{% endif %}

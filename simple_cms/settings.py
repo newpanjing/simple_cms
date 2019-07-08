@@ -69,6 +69,7 @@ TEMPLATES = [
             ],
             'libraries': {
                 'cmstags': 'simple_cms.templatetags.cmstags',
+                'murl': 'simple_cms.templatetags.mobile_url_tags',
             }
         },
 

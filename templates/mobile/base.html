@@ -1,4 +1,4 @@
-{% load static cmstags %}
+{% load cmstags murl %}
 {% load_settings as settings %}
 <!DOCTYPE html>
 <html>
@@ -8,14 +8,16 @@
           content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     {% block seo %}
         <title>{{ settings.site_name }} - {{ settings.site_title }}</title>
+        <meta name="keywords" content="{{ settings.keywords }}"/>
+        <meta name="description" content="{{ settings.description }}"/>
     {% endblock %}
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_wsfpf0xbg6k.css"/>
     {% block css %}
-        <link rel="stylesheet" href="//at.alicdn.com/t/font_1271743_qogvj3l2jhe.css"/>
-        <link rel="stylesheet" href="{% static 'mobile/css/base.css' %}"/>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
     {% endblock %}
     {% block js %}
-        <script type="text/javascript" src="{% static 'mobile/js/query.js' %}"></script>
-        <script type="text/javascript" src="{% static 'mobile/js/core.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/query.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
     {% endblock %}
 <body>
 <div class="header-wrap">
@@ -32,14 +34,16 @@
         {% endblock %}
     </div>
 </div>
+
+{% block navbar %}
+
+{% endblock %}
+
 <div class="main">
+    {% block main %}
 
-    <a href="#" id="test">你好世界</a>
-
-    <div class="test-div" style="height: 50px">哈哈</div>
-    <div class="test-div" style="height: 50px">哈哈</div>
-    <div class="test-div" style="height: 50px">哈哈</div>
-    <div class="test-div" style="height: 50px">哈哈</div>
+    {% endblock %}
 </div>
+
 </body>
 </html>

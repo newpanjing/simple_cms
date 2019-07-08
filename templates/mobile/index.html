@@ -1,0 +1,77 @@
+{% extends 'mobile/base.html' %}
+{% load static cmstags murl%}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '/swiper/css/swiper.min.css' %}"/>
+{% endblock %}
+{% block back %}{% endblock %}
+{% block navbar %}
+    <div class="navbar">
+        {% load_navbar 1 as navbars %}
+        {% for item in navbars %}
+            <a href="">{{ item.name }}</a>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block main %}
+    <div class="banner">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {% get_banner as banners %}
+                {% for item in banners %}
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <img src="{{ item.cover }}"/>
+                            <div class="title">{{ item.title }}</div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% get_all_category as categorys %}
+    {% for c in categorys %}
+        <div class="block">
+            <div class="head-title"><a href="{% get_category_url c.alias %}">{{ c.name }}</a></div>
+            {% get_article c.id 10 as articles %}
+            {% for item in articles %}
+                <a href="{% get_article_url item.category__alias item.id %}" class="item">
+                    <div class="cover">
+                        <img src="{{ item.cover }}" onerror="this.src='{% static 'image/no_image.png' %}'">
+                    </div>
+                    <div class="info">
+                        <div class="title">{{ item.title }}</div>
+                        <div class="summary">{{ item.summary|slice:':20' }}</div>
+                        <div class="time">
+                            <span class="date">
+                                <span class="iconfont icon-date"></span>
+                                <span>{{ item.create_date|date:'Y-m-d' }}</span>
+                            </span>
+                            <span class="hits">
+                                <span class="iconfont icon-yanjing"></span>
+                                <span>{{ item.hits }}</span>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+            <a href="{% get_category_url c.alias %}" class="more">更多</a>
+        </div>
+    {% endfor %}
+    <div class="block">
+        <div class=head-title>友情链接</div>
+        <div class="body">
+            {% load_links as links %}
+            {% for item in links %}
+                <a href="{{ item.url }}" target="_blank">{{ item.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static '/swiper/js/swiper.min.js' %}"></script>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            loop: true, // 循环模式选项
+        })
+    </script>
+{% endblock %}

@@ -88,7 +88,7 @@ def get_category(alias, page=1, size=10):
     paginator = Paginator(articles, size)
     url = '/{}/p/'.format(alias)
     if not alias:
-        url = '/topic'
+        url = '/topic/'
     return {
         'count': paginator.count,
         'num_pages': paginator.num_pages,
@@ -114,8 +114,12 @@ def get_page_range(page_num, show_num, current_page):
 
     star = current_page - fore
     end = current_page + after
-    if star < 1:
+    if star == 0:
+        star = 1
+        end += star
+    elif star < 0:
         end += int(math.fabs(star))
+        end += 1
         star = 1
 
     if end > page_num:
@@ -130,7 +134,13 @@ def get_page_range(page_num, show_num, current_page):
 
 
 @register.simple_tag
-def get_paginator(num_page_count, current_page, show_num, url):
+def get_mobile_paginator(num_page_count, current_page, show_num, url):
+    template = 'mobile/paginator.html'
+    return get_paginator(num_page_count, current_page, show_num, url, template)
+
+
+@register.simple_tag
+def get_paginator(num_page_count, current_page, show_num, url, template='paginator.html'):
     num_page_count = int(num_page_count)
     current_page = int(current_page)
     show_num = int(show_num)
@@ -144,7 +154,7 @@ def get_paginator(num_page_count, current_page, show_num, url):
     for i in range(start, end + 1):
         page_list.append(i)
 
-    engine = get_template('paginator.html')
+    engine = get_template(template)
     html = engine.render({
         'url': url,
         'num_pages': num_page_count,
@@ -164,6 +174,16 @@ def get_all_category():
     return Category.objects.order_by('sort').values('name', 'alias')
 
 
+@register.simple_tag
+def get_article(category_id=None, size=10):
+    params = {}
+    if category_id:
+        params['category_id'] = category_id
+    return Article.objects.filter(**params).order_by('-id').values('id', 'title', 'create_date',
+                                                                   'category__alias', 'category__name',
+                                                                   'cover', 'hits', 'summary')[:size]
+
+
 @register.filter
 def test(val):
     print(val)
@@ -177,3 +197,9 @@ def now_utctime():
 @register.filter
 def sitemap_date(val):
     return (val - datetime.timedelta(hours=8)).strftime('%Y-%m-%dT%H:%M:%S+08:00')
+
+
+@register.simple_tag
+def get_banner(size=6):
+    return Article.objects.filter(top=True).order_by('-update_date').values('id', 'category__alias', 'title',
+                                                                            'cover')[:size]

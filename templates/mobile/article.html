@@ -1,0 +1,21 @@
+{% extends 'mobile/base.html' %}
+{% load static cmstags murl %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static '/css/article.css' %}"/>
+{% endblock %}
+{% block js %}
+{% endblock %}
+{% block back %}
+    <div class="back"><a href="{% get_category_url alias %}"><span class="iconfont icon-back"></span></a></div>
+{% endblock %}
+{% block seo %}
+    <title>{{ article.title }}- {{ settings.site_name }}</title>
+    <meta name="keywords" content="{{ article.title }}"/>
+    <meta name="description" content="{{ article.summary }}"/>
+    <meta property="og:type" content="image">
+    <meta property="og:image" content="{{ article.cover }}">
+{% endblock %}
+{% block main %}
+    {{ article.content|safe }}
+{% endblock %}
