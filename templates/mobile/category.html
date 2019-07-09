@@ -20,7 +20,6 @@
 {% endblock %}
 {% block navbar %}
     <div class="navbar">
-
         {% get_all_category as categorys %}
         <a {% if alias == 'topic' %} class="active" {% endif %} href="{% get_category_url 'topic' %}">全部</a>
         {% for item in categorys %}

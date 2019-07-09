@@ -20,6 +20,8 @@ a {
   width: 100%;
   background-color: #5C5C5C;
   color: white;
+  min-height: 46px;
+  line-height: 46px;
 }
 .header .back,
 .header .title,

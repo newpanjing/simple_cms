@@ -5,11 +5,12 @@
     <link rel="stylesheet" href="{% static '/swiper/css/swiper.min.css' %}"/>
 {% endblock %}
 {% block back %}{% endblock %}
+{% block home %}{% endblock %}
 {% block navbar %}
     <div class="navbar">
         {% load_navbar 1 as navbars %}
         {% for item in navbars %}
-            <a href="">{{ item.name }}</a>
+            <a href="{{ item.url }}">{{ item.name }}</a>
         {% endfor %}
     </div>
 {% endblock %}
@@ -20,7 +21,7 @@
                 {% get_banner as banners %}
                 {% for item in banners %}
                     <div class="swiper-slide">
-                        <a href="#">
+                        <a href="{% get_article_url item.category__alias item.id %}">
                             <img src="{{ item.cover }}"/>
                             <div class="title">{{ item.title }}</div>
                         </a>

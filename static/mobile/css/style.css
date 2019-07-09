@@ -3,9 +3,14 @@ body {
   margin: 0px;
   padding: 0px;
   height: 100%;
-  font: 14px/1.6 'Microsoft YaHei', Hei, arial, sans-serif;
+  font-family: "SF Pro SC", "SF Pro Display", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 14px;
   color: #4C4C4C;
   background: #f3f3f3;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
 }
 a {
   text-decoration: none;
@@ -15,6 +20,8 @@ a {
   width: 100%;
   background-color: #5C5C5C;
   color: white;
+  min-height: 46px;
+  line-height: 46px;
 }
 .header .back,
 .header .title,
@@ -58,6 +65,9 @@ a {
   overflow-y: hidden;
   overflow-x: auto;
   width: auto;
+}
+.navbar .active {
+  color: #4593FF;
 }
 .navbar a {
   display: inline-block;
