@@ -1,7 +1,7 @@
 Django==2.2.27
 PyMySQL==0.9.3
 pytz==2019.1
-sqlparse==0.3.0
+sqlparse==0.4.4
 django-simpleui==2.1.5
 jieba
 Whoosh
